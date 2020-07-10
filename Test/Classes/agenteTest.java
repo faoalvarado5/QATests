@@ -11,6 +11,7 @@ class agenteTest{
 
     @BeforeEach
     void setUp() {
+        System.out.println("Hola");
     }
 
     @AfterEach
