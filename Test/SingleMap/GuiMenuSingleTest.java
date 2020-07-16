@@ -17,8 +17,9 @@ class GuiMenuSingleTest {
     }
 
     @Test
-    void test1(){
+    void test1() throws InterruptedException {
         GuiMenuSingle test = new GuiMenuSingle();
+        Thread.sleep(2000);
         assertEquals(test.f.getTitle(), "Simulacion de propagacion de COVID-19");
     }
 }
