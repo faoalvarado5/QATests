@@ -136,7 +136,7 @@ public class GraficaMultiple extends JPanel {
         return puntos;
     }
 
-    private double obtenerMinimoValor() {
+    public double obtenerMinimoValor() {
         double minScore = Double.MAX_VALUE;
         for (Integer score : arreglo_de_curados) {
             minScore = Math.min(minScore, score);
@@ -150,7 +150,7 @@ public class GraficaMultiple extends JPanel {
         return minScore;
     }
 
-    private double obtenerMaximoValor() {
+    public double obtenerMaximoValor() {
         double maxScore = Double.MIN_VALUE;
         for (Integer score : arreglo_de_curados) {
             maxScore = Math.max(maxScore, score);

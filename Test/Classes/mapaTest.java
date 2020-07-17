@@ -55,4 +55,15 @@ class mapaTest {
         mapa.setLargo(5);
         assertEquals(mapa.getLargo(), 5);
     }
+
+    @Test
+    void addPared() {
+
+        //Caso de prueba 46
+        mapa mapa = new mapa();
+        pared pared = new pared(2,2,2,2);
+        mapa.addPared(pared);
+        assertTrue(mapa.getParedes().size()>0);
+    }
+
 }
