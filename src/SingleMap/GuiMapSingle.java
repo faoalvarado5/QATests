@@ -294,6 +294,6 @@ public class GuiMapSingle extends JPanel implements ActionListener {
         datos_progresivos_de_la_enfermedad.agregar_datos_de_enfermos(cantidad_de_enfermos);
         datos_progresivos_de_la_enfermedad.agregar_datos_de_curados(cantidad_de_curados);
         datos_progresivos_de_la_enfermedad.agregar_datos_de_sanos(cantidad_de_sanos);
-
+        datos_progresivos_de_la_enfermedad.setDias(datos_progresivos_de_la_enfermedad.getDias()+1);
     }
 }

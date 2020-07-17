@@ -1,8 +1,9 @@
-package SingleMap;
+package Multimap;
 
 import Classes.agente;
 import Classes.enfermedad;
 import Classes.mapa;
+import SingleMap.MainGuiFrameSingle;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MainGuiFrameSingleTest {
+class MainGuiFrameMultiTest {
 
     @BeforeEach
     void setUp() {
@@ -22,9 +23,9 @@ class MainGuiFrameSingleTest {
     }
 
     @Test
-    void MainGuiFrameSingle() throws InterruptedException {
+    void MainGuiFrameMulti() throws InterruptedException {
 
-        // Prueba 55
+        // Prueba 54
         agente agente = new agente();
 
         ArrayList<agente> a1 = new ArrayList<>();
@@ -33,8 +34,7 @@ class MainGuiFrameSingleTest {
 
         enfermedad enfermedad = new enfermedad();
 
-
-        MainGuiFrameSingle mF = new MainGuiFrameSingle(a1,mapa,enfermedad,1);
+        MainGuiFrameMulti mF = new MainGuiFrameMulti(a1,mapa,enfermedad,1);
 
         Thread.sleep(1000);
 
