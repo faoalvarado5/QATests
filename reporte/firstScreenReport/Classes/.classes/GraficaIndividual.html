@@ -1,0 +1,222 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: GraficaIndividual</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">Classes</a> ]
+</div>
+
+<h1>Coverage Summary for Class: GraficaIndividual (Classes)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GraficaIndividual</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    97.4%
+  </span>
+  <span class="absValue">
+    (75/ 77)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package Classes;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import javax.swing.*;
+<i>4</i>&nbsp;import java.awt.*;
+<i>5</i>&nbsp;import java.math.BigDecimal;
+<i>6</i>&nbsp;import java.math.RoundingMode;
+<i>7</i>&nbsp;import java.util.ArrayList;
+<i>8</i>&nbsp;import java.util.List;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;public class GraficaIndividual extends JPanel {
+<i>11</i>&nbsp;
+<b class="fc"><i>12</i>&nbsp;    private int padding_de_la_grafica = 25;</b>
+<b class="fc"><i>13</i>&nbsp;    private int padding_del_label = 25;</b>
+<b class="fc"><i>14</i>&nbsp;    private Color lineColor = new Color(230, 205, 44, 180);</b>
+<b class="fc"><i>15</i>&nbsp;    private Color color_del_punto_curados = new Color(21, 67, 231, 180);</b>
+<b class="fc"><i>16</i>&nbsp;    private Color color_del_punto_enfermos = new Color(255, 0, 0, 180);</b>
+<b class="fc"><i>17</i>&nbsp;    private Color color_del_punto_sanos = new Color(21, 161, 0, 180);</b>
+<b class="fc"><i>18</i>&nbsp;    private Color gridColor = new Color(200, 200, 200, 200);</b>
+<i>19</i>&nbsp;    private int color;
+<b class="fc"><i>20</i>&nbsp;    private int tamaño_del_punto = 10;</b>
+<b class="fc"><i>21</i>&nbsp;    private int cantidad_de_personas_en_la_prueba = 20;</b>
+<i>22</i>&nbsp;    //Esta es la cantidad de divisiones que tendrá la gráfica en el eje X, dependera mucho de los dias
+<b class="fc"><i>23</i>&nbsp;    private ArrayList&lt;Integer&gt; arreglo = new ArrayList&lt;&gt;();</b>
+<i>24</i>&nbsp;
+<b class="fc"><i>25</i>&nbsp;    public GraficaIndividual(ArrayList&lt;Integer&gt; arreglo, int color, int cantidad_de_personas_en_la_prueba) {</b>
+<b class="fc"><i>26</i>&nbsp;        this.arreglo = arreglo;</b>
+<b class="fc"><i>27</i>&nbsp;        this.color = color;</b>
+<b class="fc"><i>28</i>&nbsp;        this.cantidad_de_personas_en_la_prueba = cantidad_de_personas_en_la_prueba;</b>
+<b class="fc"><i>29</i>&nbsp;    }</b>
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    protected void paintComponent(Graphics g) {
+<i>32</i>&nbsp;
+<b class="fc"><i>33</i>&nbsp;        super.paintComponent( g );</b>
+<b class="fc"><i>34</i>&nbsp;        Graphics2D grafica = (Graphics2D) g;</b>
+<i>35</i>&nbsp;
+<b class="fc"><i>36</i>&nbsp;        grafica.setRenderingHint(RenderingHints.KEY_ANTIALIASING,</b>
+<i>37</i>&nbsp;                RenderingHints.VALUE_ANTIALIAS_ON);
+<i>38</i>&nbsp;
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;        // Este loop lo que permite es meter los puntos de la gráfica
+<i>41</i>&nbsp;        // En este caso [1,2,6,8] existira una linea que vaya del (1,2) al (6,8)
+<b class="fc"><i>42</i>&nbsp;        List&lt;Point&gt; puntos_del_arreglo = agregarPuntos(arreglo);</b>
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;        // Dibuja un fondo blanco
+<b class="fc"><i>46</i>&nbsp;        grafica.setColor(Color.WHITE);</b>
+<i>47</i>&nbsp;
+<b class="fc"><i>48</i>&nbsp;        double cantidad_de_lineas = (double)obtenerMaximoValor() / 20;</b>
+<b class="fc"><i>49</i>&nbsp;        int residuo = (int)obtenerMaximoValor() % 20;</b>
+<b class="fc"><i>50</i>&nbsp;        double temp = cantidad_de_lineas;</b>
+<i>51</i>&nbsp;
+<b class="fc"><i>52</i>&nbsp;        for (int i = 0; i &lt;= 20; i++){</b>
+<b class="fc"><i>53</i>&nbsp;            int x0 = padding_de_la_grafica + padding_del_label;</b>
+<b class="fc"><i>54</i>&nbsp;            int x1 = tamaño_del_punto + padding_de_la_grafica + padding_del_label;</b>
+<b class="fc"><i>55</i>&nbsp;            int y0 = getHeight() - ((i * (int)cantidad_de_personas_en_la_prueba / 20 * (getHeight() - padding_de_la_grafica * 2 - padding_del_label)) / cantidad_de_personas_en_la_prueba + padding_de_la_grafica + padding_del_label);</b>
+<b class="fc"><i>56</i>&nbsp;            int y1 = y0;</b>
+<i>57</i>&nbsp;
+<b class="fc"><i>58</i>&nbsp;            grafica.setColor(gridColor);</b>
+<b class="fc"><i>59</i>&nbsp;            grafica.drawLine(padding_de_la_grafica + padding_del_label + 1 + tamaño_del_punto, y0, getWidth() - padding_de_la_grafica, y1);</b>
+<b class="fc"><i>60</i>&nbsp;            grafica.setColor(Color.BLACK);</b>
+<i>61</i>&nbsp;            // Aqui es donde se imprimen la cantidad de personas en la pantalla, eje Y
+<i>62</i>&nbsp;
+<b class="fc"><i>63</i>&nbsp;            double valor_del_label = i * temp;</b>
+<b class="fc"><i>64</i>&nbsp;            valor_del_label = new BigDecimal(valor_del_label).setScale(2, RoundingMode.HALF_UP).doubleValue();</b>
+<b class="fc"><i>65</i>&nbsp;            String yLabel = valor_del_label + &quot;&quot;;</b>
+<i>66</i>&nbsp;
+<b class="fc"><i>67</i>&nbsp;            FontMetrics metrics = grafica.getFontMetrics();</b>
+<b class="fc"><i>68</i>&nbsp;            int labelWidth = metrics.stringWidth(yLabel);</b>
+<i>69</i>&nbsp;            //Pone los labels en la pantalla
+<b class="fc"><i>70</i>&nbsp;            grafica.drawString(yLabel, x0 - labelWidth - 5, y0 + (metrics.getHeight() / 2) - 3);</b>
+<b class="fc"><i>71</i>&nbsp;            grafica.drawLine(x0, y0, x1, y1);</b>
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;        }
+<i>74</i>&nbsp;
+<b class="fc"><i>75</i>&nbsp;        grafica.setColor(lineColor);</b>
+<i>76</i>&nbsp;
+<b class="fc"><i>77</i>&nbsp;        agregarDatosGrafica(grafica,puntos_del_arreglo, color);</b>
+<b class="fc"><i>78</i>&nbsp;    }</b>
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;    private void agregarDatosGrafica(Graphics2D grafica, List&lt;Point&gt; puntos, int color){
+<b class="fc"><i>81</i>&nbsp;        for (int i = 0; i &lt; puntos.size() - 1; i++) {</b>
+<b class="fc"><i>82</i>&nbsp;            int x1 = puntos.get(i).x;</b>
+<b class="fc"><i>83</i>&nbsp;            int y1 = puntos.get(i).y;</b>
+<b class="fc"><i>84</i>&nbsp;            int x2 = puntos.get(i + 1).x;</b>
+<b class="fc"><i>85</i>&nbsp;            int y2 = puntos.get(i + 1).y;</b>
+<b class="fc"><i>86</i>&nbsp;            grafica.drawLine(x1, y1, x2, y2);</b>
+<i>87</i>&nbsp;        }
+<i>88</i>&nbsp;
+<b class="fc"><i>89</i>&nbsp;        if(color == 1){</b>
+<b class="nc"><i>90</i>&nbsp;            grafica.setColor(color_del_punto_enfermos);</b>
+<b class="fc"><i>91</i>&nbsp;        }else if(color == 0){</b>
+<b class="nc"><i>92</i>&nbsp;            grafica.setColor(color_del_punto_curados);</b>
+<i>93</i>&nbsp;        }else{
+<b class="fc"><i>94</i>&nbsp;            grafica.setColor(color_del_punto_sanos);</b>
+<i>95</i>&nbsp;        }
+<i>96</i>&nbsp;
+<b class="fc"><i>97</i>&nbsp;        for (int i = 0; i &lt; puntos.size(); i++) {</b>
+<b class="fc"><i>98</i>&nbsp;            int x = puntos.get(i).x - tamaño_del_punto / 2;</b>
+<b class="fc"><i>99</i>&nbsp;            int y = puntos.get(i).y - tamaño_del_punto / 2;</b>
+<b class="fc"><i>100</i>&nbsp;            int ovalW = tamaño_del_punto;</b>
+<b class="fc"><i>101</i>&nbsp;            int ovalH = tamaño_del_punto;</b>
+<b class="fc"><i>102</i>&nbsp;            grafica.fillOval(x, y, ovalW, ovalH);</b>
+<i>103</i>&nbsp;        }
+<b class="fc"><i>104</i>&nbsp;    }</b>
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;    private List&lt;Point&gt; agregarPuntos(List&lt;Integer&gt; arreglo){
+<b class="fc"><i>107</i>&nbsp;        List&lt;Point&gt; puntos = new ArrayList&lt;&gt;();</b>
+<i>108</i>&nbsp;        // Esto viene siendo tamaño de la ventana - 2 (padding de la gráfica) - padding del texto / tamaño de puntos que
+<i>109</i>&nbsp;        // hay en la grafica - 1. Esto viene siendo para el ancho
+<b class="fc"><i>110</i>&nbsp;        double xScale = ((double) getWidth() - (2 * padding_de_la_grafica) - padding_del_label) / (arreglo.size() - 1);</b>
+<i>111</i>&nbsp;        // Se divide por el max y min score porque limita el largo de la gráfica
+<b class="fc"><i>112</i>&nbsp;        double yScale = ((double) getHeight() - 2 * padding_de_la_grafica - padding_del_label) / (obtenerMaximoValor() - obtenerMinimoValor());</b>
+<i>113</i>&nbsp;
+<b class="fc"><i>114</i>&nbsp;        for (int i = 0; i &lt; arreglo.size(); i++) {</b>
+<b class="fc"><i>115</i>&nbsp;            int x1 = (int) (i * xScale + padding_de_la_grafica + padding_del_label);</b>
+<b class="fc"><i>116</i>&nbsp;            int y1 = (int) ((obtenerMaximoValor() - arreglo.get(i)) * yScale + padding_de_la_grafica);</b>
+<b class="fc"><i>117</i>&nbsp;            puntos.add(new Point(x1, y1));</b>
+<i>118</i>&nbsp;            //System.out.println(&quot;X: &quot; + Integer.toString(x1) + &quot; Y: &quot; + Integer.toString(y1));
+<i>119</i>&nbsp;        }
+<b class="fc"><i>120</i>&nbsp;        return puntos;</b>
+<i>121</i>&nbsp;    }
+<i>122</i>&nbsp;
+<i>123</i>&nbsp;    public double obtenerMinimoValor() {
+<b class="fc"><i>124</i>&nbsp;        double minScore = Double.MAX_VALUE;</b>
+<b class="fc"><i>125</i>&nbsp;        for (Integer score : arreglo) {</b>
+<b class="fc"><i>126</i>&nbsp;            minScore = Math.min(minScore, score);</b>
+<b class="fc"><i>127</i>&nbsp;        }</b>
+<i>128</i>&nbsp;
+<b class="fc"><i>129</i>&nbsp;        return minScore;</b>
+<i>130</i>&nbsp;    }
+<i>131</i>&nbsp;
+<i>132</i>&nbsp;    public double obtenerMaximoValor() {
+<b class="fc"><i>133</i>&nbsp;        double maxScore = Double.MIN_VALUE;</b>
+<b class="fc"><i>134</i>&nbsp;        for (Integer score : arreglo) {</b>
+<b class="fc"><i>135</i>&nbsp;            maxScore = Math.max(maxScore, score);</b>
+<b class="fc"><i>136</i>&nbsp;        }</b>
+<b class="fc"><i>137</i>&nbsp;        return maxScore;</b>
+<i>138</i>&nbsp;    }
+<i>139</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-22 23:43</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,275 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: agente</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">Classes</a> ]
+</div>
+
+<h1>Coverage Summary for Class: agente (Classes)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">agente</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (30/ 35)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.6%
+  </span>
+  <span class="absValue">
+    (70/ 79)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package Classes;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.io.Serializable;
+<i>4</i>&nbsp;import java.util.ArrayList;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;public class agente implements Serializable {
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;    private int tipo;
+<i>9</i>&nbsp;    private String estado;
+<i>10</i>&nbsp;    private double velocidad_x;
+<i>11</i>&nbsp;    private double velocidad_y;
+<i>12</i>&nbsp;    private int velocidad_maxima;
+<i>13</i>&nbsp;    private int velocidad_minima;
+<i>14</i>&nbsp;    private double posicion_en_eje_x;
+<i>15</i>&nbsp;    private double posicion_en_eje_y;
+<i>16</i>&nbsp;    private double tiempo_enfermo;
+<b class="fc"><i>17</i>&nbsp;    private ArrayList&lt;Double[]&gt; posiciones_del_tipo_2 = new ArrayList&lt;Double[]&gt;();;</b>
+<b class="fc"><i>18</i>&nbsp;    private int posicion_del_tipo_2 = 0;</b>
+<b class="fc"><i>19</i>&nbsp;    private Boolean validador_para_mover_posicion_del_tipo_2 = true;</b>
+<i>20</i>&nbsp;
+<b class="fc"><i>21</i>&nbsp;    public agente(int tipo, String estado, double velocidad_x, double velocidad_y, int velocidad_maxima, int velocidad_minima, double posicion_en_eje_x, double posicion_en_eje_y, double tiempo_enfermo) {</b>
+<b class="fc"><i>22</i>&nbsp;        this.tipo = tipo;</b>
+<b class="fc"><i>23</i>&nbsp;        this.estado = estado;</b>
+<b class="fc"><i>24</i>&nbsp;        this.velocidad_maxima = velocidad_maxima;</b>
+<b class="fc"><i>25</i>&nbsp;        this.velocidad_minima = velocidad_minima;</b>
+<b class="fc"><i>26</i>&nbsp;        this.velocidad_x = Math.random() * velocidad_maxima + velocidad_minima;</b>
+<b class="fc"><i>27</i>&nbsp;        this.velocidad_y = Math.random() * velocidad_maxima + velocidad_minima;</b>
+<b class="fc"><i>28</i>&nbsp;        this.posicion_en_eje_x = posicion_en_eje_x;</b>
+<b class="fc"><i>29</i>&nbsp;        this.posicion_en_eje_y = posicion_en_eje_y;</b>
+<b class="fc"><i>30</i>&nbsp;        this.tiempo_enfermo = tiempo_enfermo;</b>
+<b class="fc"><i>31</i>&nbsp;        this.posicion_del_tipo_2 = 0;</b>
+<b class="fc"><i>32</i>&nbsp;    }</b>
+<i>33</i>&nbsp;
+<b class="fc"><i>34</i>&nbsp;    public agente() {</b>
+<b class="fc"><i>35</i>&nbsp;    }</b>
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    public void mover_aleatoreamente(){
+<i>38</i>&nbsp;
+<b class="fc"><i>39</i>&nbsp;        Double random_x = Math.random()*2;</b>
+<b class="fc"><i>40</i>&nbsp;        Double random_y = Math.random()*2;</b>
+<i>41</i>&nbsp;
+<b class="fc"><i>42</i>&nbsp;        if(random_x &gt; 0.5) this.velocidad_x = -this.velocidad_x;</b>
+<b class="fc"><i>43</i>&nbsp;        if(random_y &gt; 0.5) this.velocidad_y = -this.velocidad_y;</b>
+<b class="fc"><i>44</i>&nbsp;    }</b>
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    public void agregar_puntos_al_agente_de_tipo_2(){
+<b class="fc"><i>47</i>&nbsp;        if(posiciones_del_tipo_2.size() &lt; 7){</b>
+<b class="fc"><i>48</i>&nbsp;            Double[] puntos = new Double[2];</b>
+<b class="fc"><i>49</i>&nbsp;            puntos[0] = posicion_en_eje_x;</b>
+<b class="fc"><i>50</i>&nbsp;            puntos[1] = posicion_en_eje_y;</b>
+<b class="fc"><i>51</i>&nbsp;            posiciones_del_tipo_2.add(puntos);</b>
+<i>52</i>&nbsp;        }
+<b class="fc"><i>53</i>&nbsp;    }</b>
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    public void aumentar_posicion_del_tipo_2(){
+<i>56</i>&nbsp;
+<b class="fc"><i>57</i>&nbsp;        if(this.posicion_del_tipo_2 == 0) validador_para_mover_posicion_del_tipo_2 = true;</b>
+<b class="fc"><i>58</i>&nbsp;        else if(this.posicion_del_tipo_2 == 6) validador_para_mover_posicion_del_tipo_2 = false;</b>
+<i>59</i>&nbsp;
+<b class="fc"><i>60</i>&nbsp;        if(validador_para_mover_posicion_del_tipo_2) this.posicion_del_tipo_2++;</b>
+<b class="fc"><i>61</i>&nbsp;        else this.posicion_del_tipo_2--;</b>
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;
+<b class="fc"><i>64</i>&nbsp;    }</b>
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;
+<i>67</i>&nbsp;    public void aumentar_dias_de_enfermos(){
+<b class="fc"><i>68</i>&nbsp;        this.tiempo_enfermo = tiempo_enfermo + 0.10;</b>
+<b class="fc"><i>69</i>&nbsp;    }</b>
+<i>70</i>&nbsp;
+<b class="fc"><i>71</i>&nbsp;    public void invertir_posicion_x() { this.velocidad_x = -this.velocidad_x; }</b>
+<i>72</i>&nbsp;
+<b class="fc"><i>73</i>&nbsp;    public void invertir_posicion_y() { this.velocidad_y = -this.velocidad_y; }</b>
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    public void mover_eje_x(){
+<b class="fc"><i>76</i>&nbsp;        this.posicion_en_eje_x += velocidad_x;</b>
+<b class="fc"><i>77</i>&nbsp;    }</b>
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    public void mover_eje_y(){
+<b class="fc"><i>80</i>&nbsp;        this.posicion_en_eje_y += velocidad_y;</b>
+<b class="fc"><i>81</i>&nbsp;    }</b>
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;    public void mover_para_atras_eje_x(){
+<b class="nc"><i>84</i>&nbsp;        this.posicion_en_eje_x = this.posicion_en_eje_x - (velocidad_x*2);</b>
+<b class="nc"><i>85</i>&nbsp;    }</b>
+<i>86</i>&nbsp;    public void mover_para_atras_eje_y(){
+<b class="nc"><i>87</i>&nbsp;        this.posicion_en_eje_y = this.posicion_en_eje_y - (velocidad_y*2);</b>
+<b class="nc"><i>88</i>&nbsp;    }</b>
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;    public void setTipo(int tipo) {
+<b class="fc"><i>91</i>&nbsp;        this.tipo = tipo;</b>
+<b class="fc"><i>92</i>&nbsp;    }</b>
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;    public void setEstado(String estado) {
+<b class="fc"><i>95</i>&nbsp;        this.estado = estado;</b>
+<b class="fc"><i>96</i>&nbsp;    }</b>
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    public void setVelocidad_x(double velocidad_x) {
+<b class="fc"><i>99</i>&nbsp;        this.velocidad_x = velocidad_x;</b>
+<b class="fc"><i>100</i>&nbsp;    }</b>
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;    public void setVelocidad_y(double velocidad_y) {
+<b class="fc"><i>103</i>&nbsp;        this.velocidad_y = velocidad_y;</b>
+<b class="fc"><i>104</i>&nbsp;    }</b>
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;    public void setVelocidad_maxima(int velocidad_maxima) {
+<b class="fc"><i>107</i>&nbsp;        this.velocidad_maxima = velocidad_maxima;</b>
+<b class="fc"><i>108</i>&nbsp;    }</b>
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;    public void setVelocidad_minima(int velocidad_minima) {
+<b class="fc"><i>111</i>&nbsp;        this.velocidad_minima = velocidad_minima;</b>
+<b class="fc"><i>112</i>&nbsp;    }</b>
+<i>113</i>&nbsp;
+<i>114</i>&nbsp;    public void setPosicion_en_eje_x(double posicion_en_eje_x) {
+<b class="fc"><i>115</i>&nbsp;        this.posicion_en_eje_x = posicion_en_eje_x;</b>
+<b class="fc"><i>116</i>&nbsp;    }</b>
+<i>117</i>&nbsp;
+<i>118</i>&nbsp;    public void setPosicion_en_eje_y(double posicion_en_eje_y) {
+<b class="fc"><i>119</i>&nbsp;        this.posicion_en_eje_y = posicion_en_eje_y;</b>
+<b class="fc"><i>120</i>&nbsp;    }</b>
+<i>121</i>&nbsp;
+<i>122</i>&nbsp;    public void setTiempo_enfermo(double tiempo_enfermo) {
+<b class="fc"><i>123</i>&nbsp;        this.tiempo_enfermo = tiempo_enfermo;</b>
+<b class="fc"><i>124</i>&nbsp;    }</b>
+<i>125</i>&nbsp;
+<i>126</i>&nbsp;    public int getTipo() {
+<b class="fc"><i>127</i>&nbsp;        return tipo;</b>
+<i>128</i>&nbsp;    }
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;    public String getEstado() {
+<b class="fc"><i>131</i>&nbsp;        return estado;</b>
+<i>132</i>&nbsp;    }
+<i>133</i>&nbsp;
+<i>134</i>&nbsp;    public double getVelocidad_x() {
+<b class="fc"><i>135</i>&nbsp;        return velocidad_x;</b>
+<i>136</i>&nbsp;    }
+<i>137</i>&nbsp;
+<i>138</i>&nbsp;    public double getVelocidad_y() {
+<b class="fc"><i>139</i>&nbsp;        return velocidad_y;</b>
+<i>140</i>&nbsp;    }
+<i>141</i>&nbsp;
+<i>142</i>&nbsp;    public int getVelocidad_maxima() {
+<b class="fc"><i>143</i>&nbsp;        return velocidad_maxima;</b>
+<i>144</i>&nbsp;    }
+<i>145</i>&nbsp;
+<i>146</i>&nbsp;    public int getVelocidad_minima() {
+<b class="fc"><i>147</i>&nbsp;        return velocidad_minima;</b>
+<i>148</i>&nbsp;    }
+<i>149</i>&nbsp;
+<i>150</i>&nbsp;    public double getPosicion_en_eje_x() {
+<b class="fc"><i>151</i>&nbsp;        return posicion_en_eje_x;</b>
+<i>152</i>&nbsp;    }
+<i>153</i>&nbsp;
+<i>154</i>&nbsp;    public double getPosicion_en_eje_y() {
+<b class="fc"><i>155</i>&nbsp;        return posicion_en_eje_y;</b>
+<i>156</i>&nbsp;    }
+<i>157</i>&nbsp;
+<i>158</i>&nbsp;    public double getTiempo_enfermo() {
+<b class="fc"><i>159</i>&nbsp;        return tiempo_enfermo;</b>
+<i>160</i>&nbsp;    }
+<i>161</i>&nbsp;
+<i>162</i>&nbsp;    public ArrayList&lt;Double[]&gt; getPosiciones_del_tipo_2() {
+<b class="fc"><i>163</i>&nbsp;        return posiciones_del_tipo_2;</b>
+<i>164</i>&nbsp;    }
+<i>165</i>&nbsp;
+<i>166</i>&nbsp;    public void setPosiciones_del_tipo_2(ArrayList&lt;Double[]&gt; posiciones_del_tipo_2) {
+<b class="nc"><i>167</i>&nbsp;        this.posiciones_del_tipo_2 = posiciones_del_tipo_2;</b>
+<b class="nc"><i>168</i>&nbsp;    }</b>
+<i>169</i>&nbsp;
+<i>170</i>&nbsp;    public int getPosicion_del_tipo_2() {
+<b class="fc"><i>171</i>&nbsp;        return posicion_del_tipo_2;</b>
+<i>172</i>&nbsp;    }
+<i>173</i>&nbsp;
+<i>174</i>&nbsp;    public void setPosicion_del_tipo_2(int posicion_del_tipo_2) {
+<b class="nc"><i>175</i>&nbsp;        this.posicion_del_tipo_2 = posicion_del_tipo_2;</b>
+<b class="nc"><i>176</i>&nbsp;    }</b>
+<i>177</i>&nbsp;
+<i>178</i>&nbsp;    @Override
+<i>179</i>&nbsp;    public String toString() {
+<b class="nc"><i>180</i>&nbsp;        return &quot;agente{&quot; +</b>
+<i>181</i>&nbsp;                &quot;tipo=&quot; + tipo +
+<i>182</i>&nbsp;                &quot;, estado=&#39;&quot; + estado + &#39;\&#39;&#39; +
+<i>183</i>&nbsp;                &quot;, velocidad_x=&quot; + velocidad_x +
+<i>184</i>&nbsp;                &quot;, velocidad_y=&quot; + velocidad_y +
+<i>185</i>&nbsp;                &quot;, velocidad_maxima=&quot; + velocidad_maxima +
+<i>186</i>&nbsp;                &quot;, velocidad_minima=&quot; + velocidad_minima +
+<i>187</i>&nbsp;                &quot;, posicion_en_eje_x=&quot; + posicion_en_eje_x +
+<i>188</i>&nbsp;                &quot;, posicion_en_eje_y=&quot; + posicion_en_eje_y +
+<i>189</i>&nbsp;                &quot;, tiempo_enfermo=&quot; + tiempo_enfermo +
+<i>190</i>&nbsp;                &#39;}&#39;;
+<i>191</i>&nbsp;    }
+<i>192</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-22 23:40</div>
+</div>
+</body>
+</html>

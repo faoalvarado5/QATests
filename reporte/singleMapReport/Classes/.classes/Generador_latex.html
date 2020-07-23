@@ -1,0 +1,185 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Generador_latex</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">Classes</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Generador_latex (Classes)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Generador_latex</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    68.8%
+  </span>
+  <span class="absValue">
+    (22/ 32)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package Classes;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import javax.swing.*;
+<i>4</i>&nbsp;import java.io.File;
+<i>5</i>&nbsp;import java.io.FileWriter;
+<i>6</i>&nbsp;import java.io.IOException;
+<i>7</i>&nbsp;import java.util.ArrayList;
+<i>8</i>&nbsp;
+<b class="fc"><i>9</i>&nbsp;public class Generador_latex {</b>
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;    public void generarLatex(int totalAgentes, int totalDias, ArrayList&lt;Integer&gt; listaGrafico) throws IOException {
+<i>12</i>&nbsp;
+<b class="fc"><i>13</i>&nbsp;        File archivo = new File(&quot;latex/salida.tex&quot;);</b>
+<b class="fc"><i>14</i>&nbsp;        if (!archivo.exists()) {</b>
+<i>15</i>&nbsp;            try {
+<b class="nc"><i>16</i>&nbsp;                archivo.createNewFile();</b>
+<b class="nc"><i>17</i>&nbsp;            } catch (IOException e) {</b>
+<b class="nc"><i>18</i>&nbsp;                e.printStackTrace();</b>
+<b class="nc"><i>19</i>&nbsp;            }</b>
+<i>20</i>&nbsp;        }
+<i>21</i>&nbsp;
+<b class="fc"><i>22</i>&nbsp;        FileWriter fileWriter = null;</b>
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;        try {
+<b class="fc"><i>25</i>&nbsp;            fileWriter = new FileWriter(archivo, false);</b>
+<b class="nc"><i>26</i>&nbsp;        } catch (IOException e) {</b>
+<b class="nc"><i>27</i>&nbsp;            e.printStackTrace();</b>
+<b class="fc"><i>28</i>&nbsp;        }</b>
+<i>29</i>&nbsp;
+<b class="fc"><i>30</i>&nbsp;        String contents[] = new File(&quot;latex/&quot;).list();</b>
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;        // Este es el string para generar la portada del documento de salida.
+<b class="fc"><i>33</i>&nbsp;        String documento = &quot;\&quot;&quot; + &quot;documentclass{report}&quot; + &quot;\n&quot; +</b>
+<i>34</i>&nbsp;                &quot;\&quot;&quot; + &quot;usepackage{graphicx}&quot; + &quot;\n&quot; +
+<i>35</i>&nbsp;                &quot;\&quot;&quot; + &quot;usepackage{pgfplots}&quot; + &quot;\n&quot; +
+<i>36</i>&nbsp;                &quot;\&quot;&quot; + &quot;begin{document}&quot; + &quot;\n&quot; +
+<i>37</i>&nbsp;                &quot;\&quot;&quot; + &quot;begin{titlepage}&quot; + &quot;\n&quot; +
+<i>38</i>&nbsp;                &quot;\&quot;&quot; + &quot;centering&quot; + &quot;\n&quot; +
+<i>39</i>&nbsp;                &quot;{\&quot;&quot; + &quot;bfseries\\LARGE Instituto Tecnol\\&#39;ogico de Costa Rica \\par}&quot; + &quot;\n&quot; +
+<i>40</i>&nbsp;                &quot;\&quot;&quot; + &quot;vspace{1cm}&quot; + &quot;\n&quot; +
+<i>41</i>&nbsp;                &quot;{\&quot;&quot; + &quot;scshape\\Large Facultad de Ingenier\\&#39;ia en Computaci\\&#39;on \\par}&quot; + &quot;\n&quot; +
+<i>42</i>&nbsp;                &quot;\&quot;&quot; + &quot;vspace{3cm}&quot; + &quot;\n&quot; +
+<i>43</i>&nbsp;                &quot;{\&quot;&quot; + &quot;scshape\\Huge Simulaci\\&#39;on de propagaci\\&#39;on \\\\&quot; + &quot;\n&quot; +
+<i>44</i>&nbsp;                &quot;de COVID-19\\par}&quot; + &quot;\n&quot; +
+<i>45</i>&nbsp;                &quot;\&quot;&quot; + &quot;vspace{3cm}&quot; + &quot;\n&quot; +
+<i>46</i>&nbsp;                &quot;{\&quot;&quot; + &quot;itshape\\Large Proyecto 2\\par}&quot; + &quot;\n&quot; +
+<i>47</i>&nbsp;                &quot;\&quot;&quot; + &quot;vfill&quot; + &quot;\n&quot; +
+<i>48</i>&nbsp;                &quot;{\&quot;&quot; + &quot;Large Emanuelle Jim\\&#39;enez S.\\par}&quot; + &quot;\n&quot; +
+<i>49</i>&nbsp;                &quot;{\&quot;&quot; + &quot;Large Fabrizio Alvarado B\\par}&quot; + &quot;\n&quot; +
+<i>50</i>&nbsp;                &quot;\&quot;&quot; + &quot;vfill&quot; + &quot;\n&quot; +
+<i>51</i>&nbsp;                &quot;{\&quot;&quot; + &quot;Large Junio 2020 \\par}&quot; + &quot;\n&quot; +
+<i>52</i>&nbsp;                &quot;\&quot;&quot; + &quot;end{titlepage}&quot; + &quot;\n&quot; +
+<i>53</i>&nbsp;                &quot;\&quot;&quot; + &quot;newpage&quot; + &quot;\n&quot; +
+<i>54</i>&nbsp;                &quot;\&quot;&quot; + &quot;section{Gr\\&#39;afico}&quot; + &quot;\n&quot; +
+<i>55</i>&nbsp;                &quot;\&quot;&quot; + &quot;begin{tikzpicture}&quot; + &quot;\n&quot; +
+<i>56</i>&nbsp;                &quot;\&quot;&quot; + &quot;begin{axis}[&quot; + &quot;\n&quot; +
+<i>57</i>&nbsp;                &quot;xlabel={D\\&#39;ias},&quot; + &quot;\n&quot; +
+<i>58</i>&nbsp;                &quot;ylabel={Cantidad},&quot; + &quot;\n&quot; +
+<i>59</i>&nbsp;                &quot;xmin=0, xmax=&quot; + totalDias + &quot;,&quot;+ &quot;\n&quot; +
+<i>60</i>&nbsp;                &quot;ymin=0, ymax=&quot; + totalAgentes + &quot;,&quot; + &quot;\n&quot; +
+<i>61</i>&nbsp;                &quot;legend pos=north west,&quot; + &quot;\n&quot; +
+<i>62</i>&nbsp;                &quot;ymajorgrids=true,&quot; + &quot;\n&quot; +
+<i>63</i>&nbsp;                &quot;grid style=dashed,&quot; + &quot;\n&quot; +
+<i>64</i>&nbsp;                &quot;]&quot; + &quot;\n&quot; +
+<i>65</i>&nbsp;                &quot;\&quot;&quot; + &quot;addplot[&quot; + &quot;\n&quot; +
+<i>66</i>&nbsp;                &quot;color=red,&quot; + &quot;\n&quot; +
+<i>67</i>&nbsp;                &quot;mark=square,&quot; + &quot;\n&quot; +
+<i>68</i>&nbsp;                &quot;]&quot; + &quot;\n&quot; +
+<i>69</i>&nbsp;                &quot;coordinates {&quot; + &quot;\n&quot;;
+<i>70</i>&nbsp;
+<b class="fc"><i>71</i>&nbsp;        for (int i=0; i&lt;listaGrafico.size(); i+=2) {</b>
+<i>72</i>&nbsp;
+<b class="fc"><i>73</i>&nbsp;            documento += &quot;(&quot; + listaGrafico.get(i) + &quot;, &quot; + listaGrafico.get(i+1) + &quot;)&quot;;</b>
+<i>74</i>&nbsp;        }
+<b class="fc"><i>75</i>&nbsp;        documento += &quot;\n&quot;;</b>
+<b class="fc"><i>76</i>&nbsp;        documento += &quot;};&quot; + &quot;\n&quot; +</b>
+<i>77</i>&nbsp;                &quot;\&quot;&quot; + &quot;legend{Infecci\\&#39;ones}&quot; + &quot;\n&quot; +
+<i>78</i>&nbsp;                &quot;\&quot;&quot; + &quot;end{axis}&quot; + &quot;\n&quot; +
+<i>79</i>&nbsp;                &quot;\&quot;&quot; + &quot;end{tikzpicture}&quot; + &quot;\n&quot; +
+<i>80</i>&nbsp;                &quot;\&quot;&quot; + &quot;newpage&quot; + &quot;\n&quot; +
+<i>81</i>&nbsp;                &quot;\&quot;&quot; + &quot;section{Cambios en el mapa}&quot; + &quot;\n&quot;;
+<b class="fc"><i>82</i>&nbsp;        for (int i = 1; i &lt; contents.length - 1; i++) {</b>
+<i>83</i>&nbsp;
+<b class="fc"><i>84</i>&nbsp;            documento += &quot;\&quot;&quot; + &quot;includegraphics[scale=0.20]{&quot; + contents[i] + &quot;}&quot; + &quot;\n&quot;;</b>
+<i>85</i>&nbsp;        }
+<i>86</i>&nbsp;
+<b class="fc"><i>87</i>&nbsp;        documento += &quot;\&quot;&quot; + &quot;end{document}&quot; + &quot;\n&quot;;</b>
+<i>88</i>&nbsp;
+<b class="fc"><i>89</i>&nbsp;        documento = documento.replaceAll(&quot;\&quot;&quot;, &quot;\\\\&quot;);</b>
+<i>90</i>&nbsp;        try {
+<b class="fc"><i>91</i>&nbsp;            fileWriter.write(documento);</b>
+<b class="nc"><i>92</i>&nbsp;        } catch (IOException e) {</b>
+<b class="nc"><i>93</i>&nbsp;            e.printStackTrace();</b>
+<b class="fc"><i>94</i>&nbsp;        }</b>
+<i>95</i>&nbsp;        try {
+<b class="fc"><i>96</i>&nbsp;            fileWriter.close();</b>
+<b class="nc"><i>97</i>&nbsp;        } catch (IOException e) {</b>
+<b class="nc"><i>98</i>&nbsp;            e.printStackTrace();</b>
+<b class="fc"><i>99</i>&nbsp;        }</b>
+<b class="fc"><i>100</i>&nbsp;        JOptionPane.showMessageDialog(null, &quot;Latex generado con exito.&quot;);</b>
+<b class="fc"><i>101</i>&nbsp;    }</b>
+<i>102</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-22 23:47</div>
+</div>
+</body>
+</html>

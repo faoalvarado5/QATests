@@ -1,0 +1,3 @@
+Los reportes estan generados por carpetas del programa.
+Para ver el reporte general de la clase se debe de abrir el archivo .html llamado "index", en cada una de las clases claro
+Por lo tanto, serian 4 archivos de reporte los cuales juntos conforman el reporte del proyecto entero.

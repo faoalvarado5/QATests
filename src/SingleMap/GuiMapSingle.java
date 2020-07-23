@@ -92,12 +92,6 @@ public class GuiMapSingle extends JPanel implements ActionListener {
         if(datos_progresivos_de_la_enfermedad.getDias() > configuracion_de_la_enfermedad.getDias_totales()*100) {
             t.stop();
             Generador_latex gl = new Generador_latex();
-            try {
-                gl.generarLatex(arreglo_de_los_agentes.size(), configuracion_de_la_enfermedad.getDias_totales(), listaGrafico);
-                System.exit(0);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }else{
             if(datos_progresivos_de_la_enfermedad.getDias()%100 == 0){
                 listaGrafico.add(datos_progresivos_de_la_enfermedad.getDias()/100);

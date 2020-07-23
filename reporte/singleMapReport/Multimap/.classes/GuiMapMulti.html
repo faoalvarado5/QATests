@@ -1,0 +1,386 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: GuiMapMulti</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">Multimap</a> ]
+</div>
+
+<h1>Coverage Summary for Class: GuiMapMulti (Multimap)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GuiMapMulti</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (2/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    12.3%
+  </span>
+  <span class="absValue">
+    (19/ 154)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package Multimap;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import javax.swing.*;
+<i>4</i>&nbsp;import java.awt.*;
+<i>5</i>&nbsp;import java.awt.event.ActionEvent;
+<i>6</i>&nbsp;import java.awt.event.ActionListener;
+<i>7</i>&nbsp;import java.awt.geom.Ellipse2D;
+<i>8</i>&nbsp;import java.io.IOException;
+<i>9</i>&nbsp;import java.util.ArrayList;
+<i>10</i>&nbsp;// The import from the object
+<i>11</i>&nbsp;import Classes.*;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;/**
+<i>14</i>&nbsp; *
+<i>15</i>&nbsp; * Esta es la funcion para poder imprimir las personas en el mapa, contiene un actionlistener, este es necesario para que podamos
+<i>16</i>&nbsp; * seleccionar la acción que se quiera poner en el loop con el Timer
+<i>17</i>&nbsp; *
+<i>18</i>&nbsp; */
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;public class GuiMapMulti extends JPanel implements ActionListener {
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    Timer t;                                            // Esta variable nos permite poner en un loop la acción de mover las personas
+<i>23</i>&nbsp;    ArrayList&lt;agente&gt; arreglo_de_los_agentes;           // Esta variable contiene toda la información de las personas en el mapa
+<i>24</i>&nbsp;    enfermedad configuracion_de_la_enfermedad;          // Esta variable nos permite utilizar toda la configuración de la enfermedad
+<i>25</i>&nbsp;    mapa configuracion_del_mapa;                        // Esta variable la ocupamos únicamente para poner las paredes en el mapa
+<i>26</i>&nbsp;    DatosActuales datos_progresivos_de_la_enfermedad;   // Esta variable guarda un registro de los infectados, curados y sanos, de igual forma con los dias transcurridos
+<i>27</i>&nbsp;    Frame f;                                            // Este es el frame principal del programa, lo incluímos aquí para que se actualice la pantalla durante cada loop del timer
+<i>28</i>&nbsp;    int contador;                                       // Este contador guarda la cantidad de veces que se ha recorrido la acción del timer
+<i>29</i>&nbsp;    Graphics2D mapa;                                    // Se crea la variable del mapa, aquí se desplegarán las personas y las paredes
+<b class="fc"><i>30</i>&nbsp;    ArrayList&lt;Integer&gt; listaGrafico = new ArrayList&lt;&gt;();</b>
+<i>31</i>&nbsp;
+<b class="fc"><i>32</i>&nbsp;    public GuiMapMulti(enfermedad configuracion_de_la_enfermedad, ArrayList&lt;agente&gt; arreglo_de_los_agentes, mapa configuracion_del_mapa, DatosActuales datos_progresivos_de_la_enfermedad, Frame f){</b>
+<b class="fc"><i>33</i>&nbsp;        this.configuracion_de_la_enfermedad = configuracion_de_la_enfermedad;</b>
+<b class="fc"><i>34</i>&nbsp;        this.arreglo_de_los_agentes = arreglo_de_los_agentes;</b>
+<b class="fc"><i>35</i>&nbsp;        this.configuracion_del_mapa = configuracion_del_mapa;</b>
+<b class="fc"><i>36</i>&nbsp;        this.datos_progresivos_de_la_enfermedad = datos_progresivos_de_la_enfermedad;</b>
+<b class="fc"><i>37</i>&nbsp;        t = new Timer(30, this);</b>
+<b class="fc"><i>38</i>&nbsp;        this.f = f;</b>
+<b class="fc"><i>39</i>&nbsp;    }</b>
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    // Esta función está incluída dentro de JComponent y es necesaria para mostrar gráficos en java
+<i>42</i>&nbsp;    public void paintComponent(Graphics g) {
+<b class="nc"><i>43</i>&nbsp;        super.paintComponent(g);</b>
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;        // Se le suma 1 cada vez que se recorre con el timer
+<b class="nc"><i>46</i>&nbsp;        contador++;</b>
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;        // El mapa se le asignará la variable g, que viene siendo el parametro por defecto de JComponent
+<b class="nc"><i>49</i>&nbsp;        mapa = (Graphics2D) g;</b>
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;        // Este arreglo de elipse se necesitará para poder poner todas las personas en el mapa
+<b class="nc"><i>52</i>&nbsp;        Ellipse2D[] persona = new Ellipse2D.Double[arreglo_de_los_agentes.size()];</b>
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;        // Esta función se llama para poder cambiar las personas de sanas a enfermas, curadas a enfermas y curadas a sanas
+<b class="nc"><i>55</i>&nbsp;        cambiar_color_de_las_personas();</b>
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;
+<b class="nc"><i>58</i>&nbsp;        for(int i = 0; i &lt; arreglo_de_los_agentes.size(); i++){</b>
+<i>59</i>&nbsp;            // Por cada personas que exista se van a crear los círculos que se pondrán en el mapa
+<b class="nc"><i>60</i>&nbsp;             persona[i] = new Ellipse2D.Double(arreglo_de_los_agentes.get(i).getPosicion_en_eje_x(),arreglo_de_los_agentes.get(i).getPosicion_en_eje_y(),10,10);</b>
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;             // Debemos poner el color correspondiente de las personas según su estado
+<b class="nc"><i>63</i>&nbsp;             if(arreglo_de_los_agentes.get(i).getEstado().equals(&quot;e&quot;)){</b>
+<b class="nc"><i>64</i>&nbsp;                 mapa.setPaint(Color.RED);</b>
+<b class="nc"><i>65</i>&nbsp;             }else if(arreglo_de_los_agentes.get(i).getEstado().equals(&quot;c&quot;)){</b>
+<b class="nc"><i>66</i>&nbsp;                 mapa.setPaint(Color.BLUE);</b>
+<i>67</i>&nbsp;             }else{
+<b class="nc"><i>68</i>&nbsp;                 mapa.setPaint(Color.GREEN);</b>
+<i>69</i>&nbsp;             }
+<i>70</i>&nbsp;             // Finalmente lo metemos en el mapa
+<b class="nc"><i>71</i>&nbsp;             mapa.fill(persona[i]);</b>
+<i>72</i>&nbsp;        }
+<i>73</i>&nbsp;
+<b class="nc"><i>74</i>&nbsp;        for(int i = 0; i &lt; configuracion_del_mapa.getParedes().size(); i++){</b>
+<i>75</i>&nbsp;            // Por cada pared que exista en la variable de configuración del mapa se debe de meter en el mapa
+<b class="nc"><i>76</i>&nbsp;            mapa.setPaint(Color.BLACK);</b>
+<b class="nc"><i>77</i>&nbsp;            if (configuracion_del_mapa.getParedes().get(i).getEs_horizontal()){</b>
+<b class="nc"><i>78</i>&nbsp;                mapa.drawLine(configuracion_del_mapa.getParedes().get(i).getX1()+5, configuracion_del_mapa.getParedes().get(i).getY1(),</b>
+<b class="nc"><i>79</i>&nbsp;                        configuracion_del_mapa.getParedes().get(i).getX2()-5, configuracion_del_mapa.getParedes().get(i).getY2());</b>
+<i>80</i>&nbsp;            }else{
+<b class="nc"><i>81</i>&nbsp;                mapa.drawLine(configuracion_del_mapa.getParedes().get(i).getX1(), configuracion_del_mapa.getParedes().get(i).getY1()+5,</b>
+<b class="nc"><i>82</i>&nbsp;                        configuracion_del_mapa.getParedes().get(i).getX2(), configuracion_del_mapa.getParedes().get(i).getY2()-5);</b>
+<i>83</i>&nbsp;            }
+<i>84</i>&nbsp;        }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;        // Dependiendo de la cantidad de días que una persona esté enferma se debe de sanar (Esto es una probabilidad, no es estático)
+<b class="nc"><i>87</i>&nbsp;        curar_enfermos();</b>
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;        // Se aumentan los dias cada vez que se recorre el timer
+<b class="nc"><i>90</i>&nbsp;        datos_progresivos_de_la_enfermedad.aumentar_dias_corriendo();</b>
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;        // Esta es la condición de parada
+<b class="nc"><i>93</i>&nbsp;        if(datos_progresivos_de_la_enfermedad.getDias() &gt; configuracion_de_la_enfermedad.getDias_totales()*100) {</b>
+<b class="nc"><i>94</i>&nbsp;            t.stop();</b>
+<b class="nc"><i>95</i>&nbsp;            Generador_latex gl = new Generador_latex();</b>
+<i>96</i>&nbsp;            try {
+<b class="nc"><i>97</i>&nbsp;                gl.generarLatex(arreglo_de_los_agentes.size(), configuracion_de_la_enfermedad.getDias_totales(), listaGrafico);</b>
+<b class="nc"><i>98</i>&nbsp;                System.exit(0);</b>
+<b class="nc"><i>99</i>&nbsp;            } catch (IOException e) {</b>
+<b class="nc"><i>100</i>&nbsp;                e.printStackTrace();</b>
+<b class="nc"><i>101</i>&nbsp;            }</b>
+<b class="nc"><i>102</i>&nbsp;        }else{</b>
+<b class="nc"><i>103</i>&nbsp;            if(datos_progresivos_de_la_enfermedad.getDias()%100 == 0){</b>
+<i>104</i>&nbsp;                //listaGrafico.add(datos_progresivos_de_la_enfermedad.getDias()/100);
+<i>105</i>&nbsp;                //listaGrafico.add(datos_progresivos_de_la_enfermedad.getCantidad_de_enfermos().size());
+<b class="nc"><i>106</i>&nbsp;                System.out.println(&quot;Dias: &quot; + datos_progresivos_de_la_enfermedad.getDias()/100 + &quot; Enf: &quot; + datos_progresivos_de_la_enfermedad.getCantidad_de_enfermos().size());</b>
+<i>107</i>&nbsp;            }
+<i>108</i>&nbsp;            // Esta función actualiza los datos del día; esto es necesario para poder actualizar la gráfica en tiempo real
+<b class="nc"><i>109</i>&nbsp;            actualizar_datos_progresivos();</b>
+<i>110</i>&nbsp;        }
+<i>111</i>&nbsp;
+<i>112</i>&nbsp;        // Se actualiza el frame cada vez que una persona se mueve y los datos de las gráficas cambian
+<b class="nc"><i>113</i>&nbsp;        f.repaint();</b>
+<i>114</i>&nbsp;
+<i>115</i>&nbsp;        // Inicia el timer
+<b class="nc"><i>116</i>&nbsp;        t.start();</b>
+<b class="nc"><i>117</i>&nbsp;        System.out.println(contador);</b>
+<b class="nc"><i>118</i>&nbsp;    }</b>
+<i>119</i>&nbsp;    public void actionPerformed(ActionEvent e){
+<i>120</i>&nbsp;
+<i>121</i>&nbsp;        // Este loop sirve para mover las personas
+<b class="nc"><i>122</i>&nbsp;        for(int i = 0; i &lt; arreglo_de_los_agentes.size();i++){</b>
+<i>123</i>&nbsp;
+<i>124</i>&nbsp;            // Esta variable la vamos a utilizar para poder ver si la persona choca con pared, si no lo hace entonces
+<i>125</i>&nbsp;            // puede chocar con alguna linea puesta por el usuario.
+<b class="nc"><i>126</i>&nbsp;            int validador_de_pared = 0;</b>
+<b class="nc"><i>127</i>&nbsp;            Double posicion_de_la_pared_que_choco = 0.0;</b>
+<b class="nc"><i>128</i>&nbsp;            if(arreglo_de_los_agentes.get(i).getTipo() != 3) {</b>
+<i>129</i>&nbsp;
+<b class="nc"><i>130</i>&nbsp;                arreglo_de_los_agentes.get(i).agregar_puntos_al_agente_de_tipo_2();</b>
+<i>131</i>&nbsp;
+<i>132</i>&nbsp;                // Si la persona llega al borde, entonces se debe devolver
+<b class="nc"><i>133</i>&nbsp;                if ((arreglo_de_los_agentes.get(i).getPosicion_en_eje_x() + arreglo_de_los_agentes.get(i).getVelocidad_x()&lt; 0 || arreglo_de_los_agentes.get(i).getPosicion_en_eje_x() + arreglo_de_los_agentes.get(i).getVelocidad_x() &gt; configuracion_del_mapa.getAncho() - 20)) {</b>
+<b class="nc"><i>134</i>&nbsp;                    arreglo_de_los_agentes.get(i).invertir_posicion_x();</b>
+<i>135</i>&nbsp;                }
+<b class="nc"><i>136</i>&nbsp;                if (arreglo_de_los_agentes.get(i).getPosicion_en_eje_y() + arreglo_de_los_agentes.get(i).getVelocidad_y() &lt; 0 || arreglo_de_los_agentes.get(i).getPosicion_en_eje_y() + arreglo_de_los_agentes.get(i).getVelocidad_y() &gt; configuracion_del_mapa.getLargo() - 25) {</b>
+<b class="nc"><i>137</i>&nbsp;                    arreglo_de_los_agentes.get(i).invertir_posicion_y();</b>
+<i>138</i>&nbsp;                }
+<i>139</i>&nbsp;
+<b class="nc"><i>140</i>&nbsp;                for (int j = 0; j &lt; configuracion_del_mapa.getParedes().size(); j++) {</b>
+<b class="nc"><i>141</i>&nbsp;                    ArrayList&lt;Integer[]&gt; funciones_lineales_de_las_paredes = configuracion_del_mapa.getParedes().get(j).getFunciones_lineales_de_las_paredes();</b>
+<i>142</i>&nbsp;
+<b class="nc"><i>143</i>&nbsp;                    double valor_que_contiene_pixeles_de_distancia = 0;</b>
+<b class="nc"><i>144</i>&nbsp;                    for (int z = 0; z &lt; funciones_lineales_de_las_paredes.size(); z++) {</b>
+<i>145</i>&nbsp;
+<b class="nc"><i>146</i>&nbsp;                        if (configuracion_del_mapa.getParedes().get(j).getEs_horizontal()) {</b>
+<i>147</i>&nbsp;
+<b class="nc"><i>148</i>&nbsp;                            valor_que_contiene_pixeles_de_distancia = Math.abs(funciones_lineales_de_las_paredes.get(z)[1] - arreglo_de_los_agentes.get(i).getPosicion_en_eje_y());</b>
+<i>149</i>&nbsp;
+<b class="nc"><i>150</i>&nbsp;                            if (valor_que_contiene_pixeles_de_distancia &lt; Math.abs(arreglo_de_los_agentes.get(i).getVelocidad_y()) &amp;&amp;</b>
+<b class="nc"><i>151</i>&nbsp;                                    arreglo_de_los_agentes.get(i).getPosicion_en_eje_x() == funciones_lineales_de_las_paredes.get(z)[0]) {</b>
+<b class="nc"><i>152</i>&nbsp;                                arreglo_de_los_agentes.get(i).invertir_posicion_y();</b>
+<b class="nc"><i>153</i>&nbsp;                                if(Math.random() &lt; 0.5){</b>
+<b class="nc"><i>154</i>&nbsp;                                    arreglo_de_los_agentes.get(i).invertir_posicion_x();</b>
+<i>155</i>&nbsp;                                }
+<i>156</i>&nbsp;
+<b class="nc"><i>157</i>&nbsp;                                arreglo_de_los_agentes.get(i).mover_eje_y();</b>
+<b class="nc"><i>158</i>&nbsp;                                arreglo_de_los_agentes.get(i).mover_eje_x();</b>
+<i>159</i>&nbsp;                            }
+<i>160</i>&nbsp;                        } else {
+<i>161</i>&nbsp;
+<b class="nc"><i>162</i>&nbsp;                            valor_que_contiene_pixeles_de_distancia = Math.abs(funciones_lineales_de_las_paredes.get(z)[0] - arreglo_de_los_agentes.get(i).getPosicion_en_eje_x());</b>
+<i>163</i>&nbsp;
+<b class="nc"><i>164</i>&nbsp;                            if (valor_que_contiene_pixeles_de_distancia &lt; Math.abs(arreglo_de_los_agentes.get(i).getVelocidad_x()) &amp;&amp;</b>
+<b class="nc"><i>165</i>&nbsp;                                    arreglo_de_los_agentes.get(i).getPosicion_en_eje_y() == funciones_lineales_de_las_paredes.get(z)[1]) {</b>
+<b class="nc"><i>166</i>&nbsp;                                if(Math.random() &lt; 0.5){</b>
+<b class="nc"><i>167</i>&nbsp;                                    arreglo_de_los_agentes.get(i).invertir_posicion_y();</b>
+<b class="nc"><i>168</i>&nbsp;                                }arreglo_de_los_agentes.get(i).invertir_posicion_x();</b>
+<b class="nc"><i>169</i>&nbsp;                                arreglo_de_los_agentes.get(i).mover_eje_y();</b>
+<b class="nc"><i>170</i>&nbsp;                                arreglo_de_los_agentes.get(i).mover_eje_x();</b>
+<i>171</i>&nbsp;                            }
+<i>172</i>&nbsp;                        }
+<i>173</i>&nbsp;                    }
+<i>174</i>&nbsp;                }
+<i>175</i>&nbsp;
+<b class="nc"><i>176</i>&nbsp;                if(arreglo_de_los_agentes.get(i).getTipo() == 1 || arreglo_de_los_agentes.get(i).getPosiciones_del_tipo_2().size() &lt; 7) {</b>
+<b class="nc"><i>177</i>&nbsp;                    arreglo_de_los_agentes.get(i).mover_eje_y();</b>
+<b class="nc"><i>178</i>&nbsp;                    arreglo_de_los_agentes.get(i).mover_eje_x();</b>
+<b class="nc"><i>179</i>&nbsp;                }else if(arreglo_de_los_agentes.get(i).getPosiciones_del_tipo_2().size() &gt;= 7){</b>
+<b class="nc"><i>180</i>&nbsp;                    ArrayList&lt;Double[]&gt; puntos_del_tipo_2 = arreglo_de_los_agentes.get(i).getPosiciones_del_tipo_2();</b>
+<b class="nc"><i>181</i>&nbsp;                    arreglo_de_los_agentes.get(i).setPosicion_en_eje_x(puntos_del_tipo_2.get(arreglo_de_los_agentes.get(i).getPosicion_del_tipo_2())[0]);</b>
+<b class="nc"><i>182</i>&nbsp;                    arreglo_de_los_agentes.get(i).setPosicion_en_eje_y(puntos_del_tipo_2.get(arreglo_de_los_agentes.get(i).getPosicion_del_tipo_2())[1]);</b>
+<i>183</i>&nbsp;
+<b class="nc"><i>184</i>&nbsp;                    arreglo_de_los_agentes.get(i).aumentar_posicion_del_tipo_2();</b>
+<b class="nc"><i>185</i>&nbsp;                }</b>
+<i>186</i>&nbsp;            }else {
+<i>187</i>&nbsp;
+<b class="nc"><i>188</i>&nbsp;                Boolean validador_para_averiguar_si_toca_pared_del_frame = false;</b>
+<i>189</i>&nbsp;
+<i>190</i>&nbsp;                // Si la persona llega al borde, entonces se debe devolver
+<b class="nc"><i>191</i>&nbsp;                if ((arreglo_de_los_agentes.get(i).getPosicion_en_eje_x() &lt; 0 || arreglo_de_los_agentes.get(i).getPosicion_en_eje_x() &gt; configuracion_del_mapa.getAncho() - 20)) {</b>
+<b class="nc"><i>192</i>&nbsp;                    arreglo_de_los_agentes.get(i).invertir_posicion_x();</b>
+<b class="nc"><i>193</i>&nbsp;                    validador_para_averiguar_si_toca_pared_del_frame = true;</b>
+<i>194</i>&nbsp;                }
+<b class="nc"><i>195</i>&nbsp;                if (arreglo_de_los_agentes.get(i).getPosicion_en_eje_y() &lt; 0 || arreglo_de_los_agentes.get(i).getPosicion_en_eje_y() &gt; configuracion_del_mapa.getLargo() - 25) {</b>
+<b class="nc"><i>196</i>&nbsp;                    arreglo_de_los_agentes.get(i).invertir_posicion_y();</b>
+<b class="nc"><i>197</i>&nbsp;                    validador_para_averiguar_si_toca_pared_del_frame = true;</b>
+<i>198</i>&nbsp;                }
+<i>199</i>&nbsp;
+<b class="nc"><i>200</i>&nbsp;                for (int j = 0; j &lt; configuracion_del_mapa.getParedes().size(); j++) {</b>
+<b class="nc"><i>201</i>&nbsp;                    ArrayList&lt;Integer[]&gt; funciones_lineales_de_las_paredes = configuracion_del_mapa.getParedes().get(j).getFunciones_lineales_de_las_paredes();</b>
+<b class="nc"><i>202</i>&nbsp;                    double valor_que_contiene_pixeles_de_distancia = 0;</b>
+<i>203</i>&nbsp;
+<b class="nc"><i>204</i>&nbsp;                    for (int z = 0; z &lt; funciones_lineales_de_las_paredes.size(); z++) {</b>
+<b class="nc"><i>205</i>&nbsp;                        if (configuracion_del_mapa.getParedes().get(j).getEs_horizontal()) {</b>
+<i>206</i>&nbsp;
+<b class="nc"><i>207</i>&nbsp;                            valor_que_contiene_pixeles_de_distancia = Math.abs(funciones_lineales_de_las_paredes.get(z)[1] - arreglo_de_los_agentes.get(i).getPosicion_en_eje_y());</b>
+<i>208</i>&nbsp;
+<b class="nc"><i>209</i>&nbsp;                            if (valor_que_contiene_pixeles_de_distancia &lt; Math.abs(arreglo_de_los_agentes.get(i).getVelocidad_y()) &amp;&amp;</b>
+<b class="nc"><i>210</i>&nbsp;                                    arreglo_de_los_agentes.get(i).getPosicion_en_eje_x() == funciones_lineales_de_las_paredes.get(z)[0]) {</b>
+<b class="nc"><i>211</i>&nbsp;                                arreglo_de_los_agentes.get(i).mover_eje_y();</b>
+<b class="nc"><i>212</i>&nbsp;                                arreglo_de_los_agentes.get(i).mover_eje_x();</b>
+<i>213</i>&nbsp;                            }
+<i>214</i>&nbsp;                        } else {
+<i>215</i>&nbsp;
+<b class="nc"><i>216</i>&nbsp;                            valor_que_contiene_pixeles_de_distancia = Math.abs(funciones_lineales_de_las_paredes.get(z)[0] - arreglo_de_los_agentes.get(i).getPosicion_en_eje_x());</b>
+<i>217</i>&nbsp;
+<b class="nc"><i>218</i>&nbsp;                            if (valor_que_contiene_pixeles_de_distancia &lt; Math.abs(arreglo_de_los_agentes.get(i).getVelocidad_x()) &amp;&amp;</b>
+<b class="nc"><i>219</i>&nbsp;                                    arreglo_de_los_agentes.get(i).getPosicion_en_eje_y() == funciones_lineales_de_las_paredes.get(z)[1]) {</b>
+<b class="nc"><i>220</i>&nbsp;                                arreglo_de_los_agentes.get(i).mover_eje_y();</b>
+<b class="nc"><i>221</i>&nbsp;                                arreglo_de_los_agentes.get(i).mover_eje_x();</b>
+<i>222</i>&nbsp;                            }
+<i>223</i>&nbsp;                        }
+<i>224</i>&nbsp;                    }
+<i>225</i>&nbsp;                }
+<i>226</i>&nbsp;
+<b class="nc"><i>227</i>&nbsp;                if(!validador_para_averiguar_si_toca_pared_del_frame){</b>
+<b class="nc"><i>228</i>&nbsp;                    arreglo_de_los_agentes.get(i).mover_aleatoreamente();</b>
+<i>229</i>&nbsp;                }
+<b class="nc"><i>230</i>&nbsp;                arreglo_de_los_agentes.get(i).mover_eje_y();</b>
+<b class="nc"><i>231</i>&nbsp;                arreglo_de_los_agentes.get(i).mover_eje_x();</b>
+<i>232</i>&nbsp;            }
+<i>233</i>&nbsp;         }
+<b class="nc"><i>234</i>&nbsp;        repaint();</b>
+<b class="nc"><i>235</i>&nbsp;    }</b>
+<i>236</i>&nbsp;
+<i>237</i>&nbsp;    public void curar_enfermos(){
+<b class="nc"><i>238</i>&nbsp;        for(int i = 0; i &lt; arreglo_de_los_agentes.size();i++){</b>
+<b class="nc"><i>239</i>&nbsp;            if(arreglo_de_los_agentes.get(i).getTiempo_enfermo() &gt;= 180 &amp;&amp; arreglo_de_los_agentes.get(i).getEstado().equals(&quot;e&quot;)){</b>
+<b class="nc"><i>240</i>&nbsp;                arreglo_de_los_agentes.get(i).setEstado(&quot;c&quot;);</b>
+<b class="nc"><i>241</i>&nbsp;                arreglo_de_los_agentes.get(i).setTiempo_enfermo(0);</b>
+<b class="nc"><i>242</i>&nbsp;            }else if(arreglo_de_los_agentes.get(i).getEstado().equals(&quot;e&quot;)){</b>
+<b class="nc"><i>243</i>&nbsp;                arreglo_de_los_agentes.get(i).aumentar_dias_de_enfermos();</b>
+<b class="nc"><i>244</i>&nbsp;                if(Math.random()*100 &lt;= configuracion_de_la_enfermedad.getProbabilidad_muerte() &amp;&amp; arreglo_de_los_agentes.get(i).getTiempo_enfermo()%10 == 0){</b>
+<b class="nc"><i>245</i>&nbsp;                    arreglo_de_los_agentes.remove(i);</b>
+<i>246</i>&nbsp;                }
+<i>247</i>&nbsp;            }
+<i>248</i>&nbsp;        }
+<b class="nc"><i>249</i>&nbsp;    }</b>
+<i>250</i>&nbsp;
+<i>251</i>&nbsp;    public void cambiar_color_de_las_personas(){
+<b class="nc"><i>252</i>&nbsp;        for(int indiceEnfermos = 0; indiceEnfermos &lt; arreglo_de_los_agentes.size();indiceEnfermos++){</b>
+<b class="nc"><i>253</i>&nbsp;            if(arreglo_de_los_agentes.get(indiceEnfermos).getEstado().equals(&quot;e&quot;)){</b>
+<i>254</i>&nbsp;
+<b class="nc"><i>255</i>&nbsp;                for(int indicePersonas = 0; indicePersonas &lt; arreglo_de_los_agentes.size();indicePersonas++) {</b>
+<i>256</i>&nbsp;
+<b class="nc"><i>257</i>&nbsp;                    int posicion_x = (int)arreglo_de_los_agentes.get(indicePersonas).getPosicion_en_eje_x();</b>
+<b class="nc"><i>258</i>&nbsp;                    int posicion_y = (int)arreglo_de_los_agentes.get(indicePersonas).getPosicion_en_eje_y() ;</b>
+<b class="nc"><i>259</i>&nbsp;                    int posicion_x_enfermos = (int)arreglo_de_los_agentes.get(indiceEnfermos).getPosicion_en_eje_x();</b>
+<b class="nc"><i>260</i>&nbsp;                    int posicion_y_enfermos = (int)arreglo_de_los_agentes.get(indiceEnfermos).getPosicion_en_eje_y();</b>
+<i>261</i>&nbsp;
+<b class="nc"><i>262</i>&nbsp;                    if((posicion_x + 5 &gt;= posicion_x_enfermos &amp;&amp; posicion_x - 5 &lt;= posicion_x_enfermos) &amp;&amp; (posicion_y + 5 &gt;= posicion_y_enfermos &amp;&amp; posicion_y - 5 &lt;= posicion_y_enfermos)</b>
+<i>263</i>&nbsp;                            &amp;&amp; indiceEnfermos != indicePersonas){
+<i>264</i>&nbsp;
+<b class="nc"><i>265</i>&nbsp;                        int tipo1 = (int)arreglo_de_los_agentes.get(indicePersonas).getTipo();</b>
+<b class="nc"><i>266</i>&nbsp;                        int tipo2 = (int)arreglo_de_los_agentes.get(indiceEnfermos).getTipo();</b>
+<b class="nc"><i>267</i>&nbsp;                        float probabilidad_de_contagio = configuracion_de_la_enfermedad.getMatriz_de_cotagio().get(tipo1-1).get(tipo2-1);</b>
+<i>268</i>&nbsp;
+<b class="nc"><i>269</i>&nbsp;                        if(configuracion_de_la_enfermedad.getReinfeccion() != 0 &amp;&amp;</b>
+<b class="nc"><i>270</i>&nbsp;                                Math.random()*100 &lt;= probabilidad_de_contagio &amp;&amp;</b>
+<b class="nc"><i>271</i>&nbsp;                                arreglo_de_los_agentes.get(indicePersonas).getEstado().equals(&quot;c&quot;)){</b>
+<i>272</i>&nbsp;
+<b class="nc"><i>273</i>&nbsp;                            arreglo_de_los_agentes.get(indicePersonas).setEstado(&quot;e&quot;);</b>
+<b class="nc"><i>274</i>&nbsp;                        }else if (Math.random()*100 &lt;= probabilidad_de_contagio &amp;&amp;</b>
+<b class="nc"><i>275</i>&nbsp;                                arreglo_de_los_agentes.get(indicePersonas).getEstado().equals(&quot;s&quot;)){</b>
+<i>276</i>&nbsp;
+<b class="nc"><i>277</i>&nbsp;                            arreglo_de_los_agentes.get(indicePersonas).setEstado(&quot;e&quot;);</b>
+<i>278</i>&nbsp;                        }
+<i>279</i>&nbsp;                    }
+<i>280</i>&nbsp;                }
+<i>281</i>&nbsp;            }
+<i>282</i>&nbsp;        }
+<b class="nc"><i>283</i>&nbsp;    }</b>
+<i>284</i>&nbsp;
+<i>285</i>&nbsp;    public void actualizar_datos_progresivos(){
+<i>286</i>&nbsp;
+<b class="fc"><i>287</i>&nbsp;        int cantidad_de_enfermos = 0;</b>
+<b class="fc"><i>288</i>&nbsp;        int cantidad_de_curados = 0;</b>
+<b class="fc"><i>289</i>&nbsp;        int cantidad_de_sanos = 0;</b>
+<i>290</i>&nbsp;
+<b class="fc"><i>291</i>&nbsp;        for(int i = 0; i &lt; arreglo_de_los_agentes.size(); i++){</b>
+<b class="fc"><i>292</i>&nbsp;            if(arreglo_de_los_agentes.get(i).getEstado().equals(&quot;e&quot;)) cantidad_de_enfermos++;</b>
+<b class="nc"><i>293</i>&nbsp;            else if(arreglo_de_los_agentes.get(i).getEstado().equals(&quot;c&quot;)) cantidad_de_curados++;</b>
+<b class="nc"><i>294</i>&nbsp;            else cantidad_de_sanos++;</b>
+<i>295</i>&nbsp;        }
+<i>296</i>&nbsp;
+<b class="fc"><i>297</i>&nbsp;        datos_progresivos_de_la_enfermedad.agregar_datos_de_enfermos(cantidad_de_enfermos);</b>
+<b class="fc"><i>298</i>&nbsp;        datos_progresivos_de_la_enfermedad.agregar_datos_de_curados(cantidad_de_curados);</b>
+<b class="fc"><i>299</i>&nbsp;        datos_progresivos_de_la_enfermedad.agregar_datos_de_sanos(cantidad_de_sanos);</b>
+<b class="fc"><i>300</i>&nbsp;        datos_progresivos_de_la_enfermedad.setDias(datos_progresivos_de_la_enfermedad.getDias()+1);</b>
+<i>301</i>&nbsp;
+<b class="fc"><i>302</i>&nbsp;    }</b>
+<i>303</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-22 23:47</div>
+</div>
+</body>
+</html>

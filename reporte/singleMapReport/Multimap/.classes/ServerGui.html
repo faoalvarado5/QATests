@@ -1,0 +1,220 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ServerGui</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">Multimap</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ServerGui (Multimap)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ServerGui</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/ 18)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ServerGui$StartServerGui</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/ 4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ServerGui$StartServerGui$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    34.8%
+  </span>
+  <span class="absValue">
+    (8/ 23)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (30/ 45)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package Multimap;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import Classes.agente;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import javax.swing.*;
+<i>6</i>&nbsp;import java.awt.event.ActionEvent;
+<i>7</i>&nbsp;import java.awt.event.ActionListener;
+<i>8</i>&nbsp;import java.io.ObjectInputStream;
+<i>9</i>&nbsp;import java.io.ObjectOutputStream;
+<i>10</i>&nbsp;import java.net.ServerSocket;
+<i>11</i>&nbsp;import java.net.Socket;
+<i>12</i>&nbsp;import java.util.concurrent.TimeUnit;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;public class ServerGui {
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    public JFrame f;
+<i>17</i>&nbsp;
+<b class="fc"><i>18</i>&nbsp;    public JButton start_button = new JButton(&quot;Ready to start&quot;);//creating instance of JButton</b>
+<b class="fc"><i>19</i>&nbsp;    JLabel label = new JLabel(&quot;Looking for clients...&quot;);</b>
+<b class="fc"><i>20</i>&nbsp;    JLabel label_of_countries_connected = new JLabel(&quot;&quot;);</b>
+<b class="fc"><i>21</i>&nbsp;    int number_of_clients_connected = 1;</b>
+<i>22</i>&nbsp;
+<b class="fc"><i>23</i>&nbsp;    public ServerGui() {</b>
+<i>24</i>&nbsp;
+<b class="fc"><i>25</i>&nbsp;        f = new JFrame(&quot;Simulacion de propagacion de COVID-19&quot;);//creating instance of JFrame</b>
+<i>26</i>&nbsp;
+<b class="fc"><i>27</i>&nbsp;        start_button.setBounds(150, 200, 150, 40);</b>
+<b class="fc"><i>28</i>&nbsp;        label.setBounds(150, 100, 150, 40);</b>
+<b class="fc"><i>29</i>&nbsp;        label_of_countries_connected.setBounds(150, 50, 150, 40);</b>
+<i>30</i>&nbsp;
+<b class="fc"><i>31</i>&nbsp;        start_button.addActionListener(new StartServerGui());</b>
+<i>32</i>&nbsp;
+<b class="fc"><i>33</i>&nbsp;        f.add(label_of_countries_connected);</b>
+<b class="fc"><i>34</i>&nbsp;        f.add(start_button);</b>
+<b class="fc"><i>35</i>&nbsp;        f.add(label);</b>
+<i>36</i>&nbsp;
+<b class="fc"><i>37</i>&nbsp;        f.setSize(500, 400);//400 width and 500 height</b>
+<b class="fc"><i>38</i>&nbsp;        f.setLayout(null);//using no layout managers</b>
+<b class="fc"><i>39</i>&nbsp;        f.setVisible(true);//making the frame visible</b>
+<b class="fc"><i>40</i>&nbsp;        f.setLocationRelativeTo(null);</b>
+<i>41</i>&nbsp;
+<b class="fc"><i>42</i>&nbsp;    }</b>
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;
+<b class="fc"><i>45</i>&nbsp;    class StartServerGui implements ActionListener {</b>
+<i>46</i>&nbsp;        @Override
+<i>47</i>&nbsp;        public void actionPerformed(ActionEvent e) {
+<b class="fc"><i>48</i>&nbsp;            Thread thread = new Thread(new Runnable() {</b>
+<i>49</i>&nbsp;                @Override
+<i>50</i>&nbsp;                public void run() {
+<i>51</i>&nbsp;                    try {
+<i>52</i>&nbsp;
+<b class="fc"><i>53</i>&nbsp;                        ServerSocket serverSocket = new ServerSocket(1234);</b>
+<i>54</i>&nbsp;
+<b class="fc"><i>55</i>&nbsp;                        int contador = 0;</b>
+<i>56</i>&nbsp;
+<b class="fc"><i>57</i>&nbsp;                        while (contador &lt; 5) {</b>
+<i>58</i>&nbsp;
+<b class="fc"><i>59</i>&nbsp;                            TimeUnit.SECONDS.sleep(1);</b>
+<b class="fc"><i>60</i>&nbsp;                            contador++;</b>
+<b class="fc"><i>61</i>&nbsp;                            label.setText(&quot;Looking for clients... &quot; + contador);</b>
+<b class="fc"><i>62</i>&nbsp;                            Socket socket = serverSocket.accept();</b>
+<i>63</i>&nbsp;
+<b class="nc"><i>64</i>&nbsp;                            ObjectOutputStream outStream = new ObjectOutputStream(socket.getOutputStream());</b>
+<b class="nc"><i>65</i>&nbsp;                            ObjectInputStream inStream = new ObjectInputStream(socket.getInputStream());</b>
+<i>66</i>&nbsp;
+<b class="nc"><i>67</i>&nbsp;                            if(socket.isConnected()){</b>
+<b class="nc"><i>68</i>&nbsp;                                String recvPacket = (String) inStream.readObject();</b>
+<b class="nc"><i>69</i>&nbsp;                                label_of_countries_connected.setText(label_of_countries_connected.getText() + &quot;, &quot; + recvPacket);</b>
+<i>70</i>&nbsp;
+<b class="nc"><i>71</i>&nbsp;                                String msg = &quot;Hi you are the number &quot; + number_of_clients_connected;</b>
+<b class="nc"><i>72</i>&nbsp;                                outStream.writeObject(msg);</b>
+<b class="nc"><i>73</i>&nbsp;                                number_of_clients_connected++;</b>
+<i>74</i>&nbsp;
+<b class="nc"><i>75</i>&nbsp;                                outStream.writeObject(number_of_clients_connected);</b>
+<b class="nc"><i>76</i>&nbsp;                                start_button.setEnabled(true);</b>
+<i>77</i>&nbsp;                            }
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;
+<b class="nc"><i>80</i>&nbsp;                        }</b>
+<b class="nc"><i>81</i>&nbsp;                    }catch (Exception error){</b>
+<b class="nc"><i>82</i>&nbsp;                        JOptionPane.showMessageDialog(null, &quot;Something went wrong...&quot;);</b>
+<b class="nc"><i>83</i>&nbsp;                    }</b>
+<b class="nc"><i>84</i>&nbsp;                }</b>
+<i>85</i>&nbsp;            });
+<i>86</i>&nbsp;
+<b class="fc"><i>87</i>&nbsp;            thread.start();</b>
+<i>88</i>&nbsp;
+<b class="fc"><i>89</i>&nbsp;        }</b>
+<i>90</i>&nbsp;    }
+<i>91</i>&nbsp;
+<i>92</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-22 23:47</div>
+</div>
+</body>
+</html>

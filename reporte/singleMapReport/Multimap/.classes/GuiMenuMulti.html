@@ -1,0 +1,403 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: GuiMenuMulti</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">Multimap</a> ]
+</div>
+
+<h1>Coverage Summary for Class: GuiMenuMulti (Multimap)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GuiMenuMulti</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 27)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GuiMenuMulti$comenzar_prueba</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GuiMenuMulti$configuracion_agente</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 37)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GuiMenuMulti$configuracion_enfermedad</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 38)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GuiMenuMulti$configuracion_mapa</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 29)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 137)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package Multimap;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import javax.swing.*;
+<i>4</i>&nbsp;import java.awt.event.ActionEvent;
+<i>5</i>&nbsp;import java.awt.event.ActionListener;
+<i>6</i>&nbsp;import java.io.File;
+<i>7</i>&nbsp;import java.util.ArrayList;
+<i>8</i>&nbsp;import java.util.Random;
+<i>9</i>&nbsp;import java.util.Scanner;
+<i>10</i>&nbsp;// The import from the object
+<i>11</i>&nbsp;import Classes.*;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;public class GuiMenuMulti {
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    JFrame f;
+<i>16</i>&nbsp;    ArrayList&lt;agente&gt; arreglo_de_agentes;
+<i>17</i>&nbsp;    mapa configuracion_de_mapa;
+<i>18</i>&nbsp;    enfermedad configuracion_de_enfermedad;
+<i>19</i>&nbsp;    int archivosCargados;
+<b class="nc"><i>20</i>&nbsp;    JButton boton_agentes = new JButton(&quot;Cargar agentes&quot;);//creating instance of JButton</b>
+<b class="nc"><i>21</i>&nbsp;    JButton boton_mapa = new JButton(&quot;Cargar mapa&quot;);//creating instance of JButton</b>
+<b class="nc"><i>22</i>&nbsp;    JButton boton_enferdad = new JButton(&quot;Cargar enfermedad&quot;);//creating instance of JButton</b>
+<b class="nc"><i>23</i>&nbsp;    JButton boton_comenzar = new JButton(&quot;Comenzar&quot;);//creating instance of JButton</b>
+<i>24</i>&nbsp;
+<b class="nc"><i>25</i>&nbsp;    public GuiMenuMulti() {</b>
+<i>26</i>&nbsp;
+<b class="nc"><i>27</i>&nbsp;        f = new JFrame(&quot;Simulacion de propagacion de COVID-19&quot;);//creating instance of JFrame</b>
+<b class="nc"><i>28</i>&nbsp;        JLabel label1 = new JLabel(&quot;Favor ingresar los archivos en su orden.&quot;);</b>
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;
+<b class="nc"><i>31</i>&nbsp;        boton_agentes.setEnabled(false);</b>
+<i>32</i>&nbsp;
+<b class="nc"><i>33</i>&nbsp;        boton_agentes.setBounds(70, 200, 150, 40);</b>
+<b class="nc"><i>34</i>&nbsp;        label1.setBounds(30, 50, 250, 40);</b>
+<b class="nc"><i>35</i>&nbsp;        boton_mapa.setBounds(70, 150, 150, 40);</b>
+<b class="nc"><i>36</i>&nbsp;        boton_enferdad.setBounds(70, 100, 150, 40);</b>
+<b class="nc"><i>37</i>&nbsp;        boton_comenzar.setBounds(70, 250, 150, 40);</b>
+<i>38</i>&nbsp;
+<b class="nc"><i>39</i>&nbsp;        boton_agentes.addActionListener(new configuracion_agente());</b>
+<b class="nc"><i>40</i>&nbsp;        boton_mapa.addActionListener(new configuracion_mapa());</b>
+<b class="nc"><i>41</i>&nbsp;        boton_enferdad.addActionListener(new configuracion_enfermedad());</b>
+<b class="nc"><i>42</i>&nbsp;        boton_comenzar.addActionListener(new comenzar_prueba());</b>
+<i>43</i>&nbsp;
+<b class="nc"><i>44</i>&nbsp;        f.add(label1);</b>
+<b class="nc"><i>45</i>&nbsp;        f.add(boton_agentes);//adding button in JFrame</b>
+<b class="nc"><i>46</i>&nbsp;        f.add(boton_mapa);//adding button in JFrame</b>
+<b class="nc"><i>47</i>&nbsp;        f.add(boton_enferdad);//adding button in JFrame</b>
+<b class="nc"><i>48</i>&nbsp;        f.add(boton_comenzar);</b>
+<i>49</i>&nbsp;
+<b class="nc"><i>50</i>&nbsp;        f.setSize(300, 400);//400 width and 500 height</b>
+<b class="nc"><i>51</i>&nbsp;        f.setLayout(null);//using no layout managers</b>
+<b class="nc"><i>52</i>&nbsp;        f.setVisible(true);//making the frame visible</b>
+<b class="nc"><i>53</i>&nbsp;        f.setLocationRelativeTo(null);</b>
+<b class="nc"><i>54</i>&nbsp;    }</b>
+<i>55</i>&nbsp;
+<b class="nc"><i>56</i>&nbsp;    class configuracion_agente implements ActionListener {</b>
+<i>57</i>&nbsp;        @Override
+<i>58</i>&nbsp;        public void actionPerformed(ActionEvent e) {
+<b class="nc"><i>59</i>&nbsp;            JFileChooser fileChooser = new JFileChooser();</b>
+<b class="nc"><i>60</i>&nbsp;            fileChooser.showOpenDialog(null);</b>
+<b class="nc"><i>61</i>&nbsp;            File archivo = fileChooser.getSelectedFile();</b>
+<b class="nc"><i>62</i>&nbsp;            if(archivo != null){</b>
+<b class="nc"><i>63</i>&nbsp;                ArrayList&lt;agente&gt; agentes = new ArrayList&lt;agente&gt;();</b>
+<i>64</i>&nbsp;                try {
+<i>65</i>&nbsp;
+<b class="nc"><i>66</i>&nbsp;                    Scanner myReader = new Scanner(archivo);</b>
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;                    //Aqui leo la primera linea donde vienen la cantidad de agentes.
+<b class="nc"><i>69</i>&nbsp;                    String line1 = myReader.nextLine();</b>
+<b class="nc"><i>70</i>&nbsp;                    int x = Integer.parseInt(line1);</b>
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;                    //Aqui recorro la cantidad de agentes que vienen en el documento.
+<b class="nc"><i>73</i>&nbsp;                    for (int i=0; i&lt;x; i++) {</b>
+<i>74</i>&nbsp;
+<b class="nc"><i>75</i>&nbsp;                        int cantidad = Integer.parseInt(myReader.nextLine());</b>
+<i>76</i>&nbsp;
+<b class="nc"><i>77</i>&nbsp;                        int tipo = Integer.parseInt(myReader.nextLine());</b>
+<b class="nc"><i>78</i>&nbsp;                        String velocidades = myReader.nextLine();</b>
+<b class="nc"><i>79</i>&nbsp;                        String[] velocidades2 = velocidades.split(&quot; &quot;);</b>
+<b class="nc"><i>80</i>&nbsp;                        String estado = myReader.nextLine();</b>
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;
+<i>83</i>&nbsp;                        //Aqui hago la lista de cada uno de los agentes segun su tipo especificado en el documento.
+<b class="nc"><i>84</i>&nbsp;                        Random rand = new Random();</b>
+<i>85</i>&nbsp;
+<b class="nc"><i>86</i>&nbsp;                        for (int y=0; y&lt;cantidad; y++) {</b>
+<b class="nc"><i>87</i>&nbsp;                            agente agente = new agente();</b>
+<b class="nc"><i>88</i>&nbsp;                            agente.setVelocidad_maxima(Integer.parseInt(velocidades2[1]));</b>
+<b class="nc"><i>89</i>&nbsp;                            agente.setVelocidad_minima(Integer.parseInt(velocidades2[0]));</b>
+<b class="nc"><i>90</i>&nbsp;                            agente.setTipo(tipo);</b>
+<b class="nc"><i>91</i>&nbsp;                            agente.setEstado(estado);</b>
+<b class="nc"><i>92</i>&nbsp;                            agente.setTiempo_enfermo(0);</b>
+<b class="nc"><i>93</i>&nbsp;                            int velocidad_maxima = Integer.parseInt(velocidades2[1]);</b>
+<b class="nc"><i>94</i>&nbsp;                            int velocidad_minima = Integer.parseInt(velocidades2[0]);</b>
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;
+<b class="nc"><i>97</i>&nbsp;                            if(velocidad_maxima == 0) agente.setVelocidad_x(0);</b>
+<b class="nc"><i>98</i>&nbsp;                            else agente.setVelocidad_x(velocidad_maxima+rand.nextInt(velocidad_maxima));</b>
+<b class="nc"><i>99</i>&nbsp;                            if(velocidad_minima == 0) agente.setVelocidad_y(0);</b>
+<b class="nc"><i>100</i>&nbsp;                            else agente.setVelocidad_y(velocidad_minima+rand.nextInt(velocidad_maxima));</b>
+<b class="nc"><i>101</i>&nbsp;                            agente.setPosicion_en_eje_x(rand.nextInt(configuracion_de_mapa.getAncho()));</b>
+<b class="nc"><i>102</i>&nbsp;                            agente.setPosicion_en_eje_y(rand.nextInt(configuracion_de_mapa.getLargo()));</b>
+<i>103</i>&nbsp;
+<b class="nc"><i>104</i>&nbsp;                            agentes.add(agente);</b>
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;                        }
+<i>107</i>&nbsp;                    }
+<b class="nc"><i>108</i>&nbsp;                    arreglo_de_agentes = agentes;</b>
+<b class="nc"><i>109</i>&nbsp;                } catch(Exception err) {</b>
+<b class="nc"><i>110</i>&nbsp;                    JOptionPane.showMessageDialog(null, err);</b>
+<b class="nc"><i>111</i>&nbsp;                }</b>
+<i>112</i>&nbsp;            }
+<b class="nc"><i>113</i>&nbsp;        }</b>
+<i>114</i>&nbsp;    }
+<i>115</i>&nbsp;
+<b class="nc"><i>116</i>&nbsp;    class configuracion_mapa implements ActionListener {</b>
+<i>117</i>&nbsp;
+<i>118</i>&nbsp;        @Override
+<i>119</i>&nbsp;        public void actionPerformed(ActionEvent e) {
+<b class="nc"><i>120</i>&nbsp;            JFileChooser fileChooser = new JFileChooser();</b>
+<b class="nc"><i>121</i>&nbsp;            fileChooser.showOpenDialog(null);</b>
+<b class="nc"><i>122</i>&nbsp;            File archivo = fileChooser.getSelectedFile();</b>
+<b class="nc"><i>123</i>&nbsp;            if(archivo != null){</b>
+<b class="nc"><i>124</i>&nbsp;                mapa mapa = new mapa();</b>
+<i>125</i>&nbsp;                try {
+<i>126</i>&nbsp;
+<b class="nc"><i>127</i>&nbsp;                    Scanner myReader = new Scanner(archivo);</b>
+<i>128</i>&nbsp;
+<i>129</i>&nbsp;                    //Aqui leo la primera linea donde vienen las dimenciones del mapa
+<b class="nc"><i>130</i>&nbsp;                    String line1 = myReader.nextLine();</b>
+<b class="nc"><i>131</i>&nbsp;                    System.out.println(line1);</b>
+<b class="nc"><i>132</i>&nbsp;                    String[] dimenciones = line1.split(&quot; &quot;);</b>
+<b class="nc"><i>133</i>&nbsp;                    mapa.setAncho(Integer.parseInt(dimenciones[0]));</b>
+<b class="nc"><i>134</i>&nbsp;                    mapa.setLargo(Integer.parseInt(dimenciones[1]));</b>
+<i>135</i>&nbsp;
+<b class="nc"><i>136</i>&nbsp;                    if(myReader.hasNextLine()) {</b>
+<i>137</i>&nbsp;
+<i>138</i>&nbsp;                        //Aqui leo la cantidad de paredes que tiene el mapa.
+<b class="nc"><i>139</i>&nbsp;                        String line2 = myReader.nextLine();</b>
+<b class="nc"><i>140</i>&nbsp;                        int paredes = Integer.parseInt(line2);</b>
+<i>141</i>&nbsp;
+<b class="nc"><i>142</i>&nbsp;                        while (paredes != 0) {</b>
+<i>143</i>&nbsp;
+<i>144</i>&nbsp;                            //Aqui leo y asigno las dimenciones de las paredes hasta que ya no hayan mas.
+<b class="nc"><i>145</i>&nbsp;                            String linex = myReader.nextLine();</b>
+<b class="nc"><i>146</i>&nbsp;                            String[] dimenciones2 = linex.split(&quot; &quot;);</b>
+<b class="nc"><i>147</i>&nbsp;                            pared pared = new pared(Integer.parseInt(dimenciones2[0]), Integer.parseInt(dimenciones2[1]), Integer.parseInt(dimenciones2[2]), Integer.parseInt(dimenciones2[3]));</b>
+<b class="nc"><i>148</i>&nbsp;                            mapa.addPared(pared);</b>
+<b class="nc"><i>149</i>&nbsp;                            paredes -= 1;</b>
+<b class="nc"><i>150</i>&nbsp;                        }</b>
+<b class="nc"><i>151</i>&nbsp;                        configuracion_de_mapa = mapa;</b>
+<b class="nc"><i>152</i>&nbsp;                        archivosCargados += 1;</b>
+<b class="nc"><i>153</i>&nbsp;                        boton_agentes.setEnabled(true);</b>
+<i>154</i>&nbsp;                    }
+<i>155</i>&nbsp;
+<b class="nc"><i>156</i>&nbsp;                 } catch(Exception err) {</b>
+<b class="nc"><i>157</i>&nbsp;                     JOptionPane.showMessageDialog(null, err);</b>
+<b class="nc"><i>158</i>&nbsp;                 }</b>
+<i>159</i>&nbsp;            }
+<b class="nc"><i>160</i>&nbsp;        }</b>
+<i>161</i>&nbsp;    }
+<i>162</i>&nbsp;
+<b class="nc"><i>163</i>&nbsp;    class configuracion_enfermedad implements ActionListener {</b>
+<i>164</i>&nbsp;        @Override
+<i>165</i>&nbsp;        public void actionPerformed(ActionEvent e) {
+<b class="nc"><i>166</i>&nbsp;            JFileChooser fileChooser = new JFileChooser();</b>
+<b class="nc"><i>167</i>&nbsp;            fileChooser.showOpenDialog(null);</b>
+<b class="nc"><i>168</i>&nbsp;            File archivo = fileChooser.getSelectedFile();</b>
+<b class="nc"><i>169</i>&nbsp;            if(archivo != null){</b>
+<b class="nc"><i>170</i>&nbsp;                enfermedad enfermedad = new enfermedad();</b>
+<i>171</i>&nbsp;
+<i>172</i>&nbsp;                try{
+<i>173</i>&nbsp;
+<b class="nc"><i>174</i>&nbsp;                    Scanner myReader = new Scanner(archivo);</b>
+<i>175</i>&nbsp;
+<i>176</i>&nbsp;                    //Aqui leo la primera linea donde viene la probabilidad de muerte.
+<b class="nc"><i>177</i>&nbsp;                    String line1 = myReader.nextLine();</b>
+<b class="nc"><i>178</i>&nbsp;                    enfermedad.setProbabilidad_muerte(Float.parseFloat(line1));</b>
+<i>179</i>&nbsp;
+<i>180</i>&nbsp;                    //Aqui leo la segunda linea donde viene la cantidad de segundos para morir.
+<b class="nc"><i>181</i>&nbsp;                    String line2 = myReader.nextLine();</b>
+<b class="nc"><i>182</i>&nbsp;                    enfermedad.setDias_de_muerte(Integer.parseInt(line2));</b>
+<i>183</i>&nbsp;
+<i>184</i>&nbsp;                    //Aqui leo la tercera linea donde viene la cantidad de segundos para curarse.
+<b class="nc"><i>185</i>&nbsp;                    String line3 = myReader.nextLine();</b>
+<b class="nc"><i>186</i>&nbsp;                    enfermedad.setDias_de_recuperacion(Integer.parseInt(line3));</b>
+<i>187</i>&nbsp;
+<b class="nc"><i>188</i>&nbsp;                    ArrayList&lt;ArrayList&lt;Float&gt;&gt; matriz = new ArrayList&lt;ArrayList&lt;Float&gt;&gt;();</b>
+<i>189</i>&nbsp;
+<b class="nc"><i>190</i>&nbsp;                    for (int x=0; x&lt;4; x++) {</b>
+<i>191</i>&nbsp;
+<i>192</i>&nbsp;                        //Aqui leo y asigno las probabilidades de contagio segun cada individuo.
+<b class="nc"><i>193</i>&nbsp;                        String linex = myReader.nextLine();</b>
+<b class="nc"><i>194</i>&nbsp;                        String[] probabilidadesx = linex.split(&quot; &quot;);</b>
+<b class="nc"><i>195</i>&nbsp;                        ArrayList&lt;Float&gt; arrayList = new ArrayList&lt;Float&gt;();</b>
+<i>196</i>&nbsp;
+<b class="nc"><i>197</i>&nbsp;                        arrayList.add(Float.parseFloat(probabilidadesx[0]));</b>
+<b class="nc"><i>198</i>&nbsp;                        arrayList.add(Float.parseFloat(probabilidadesx[1]));</b>
+<b class="nc"><i>199</i>&nbsp;                        arrayList.add(Float.parseFloat(probabilidadesx[2]));</b>
+<b class="nc"><i>200</i>&nbsp;                        arrayList.add(Float.parseFloat(probabilidadesx[3]));</b>
+<b class="nc"><i>201</i>&nbsp;                        matriz.add(arrayList);</b>
+<i>202</i>&nbsp;                    }
+<b class="nc"><i>203</i>&nbsp;                    enfermedad.setMatriz_de_cotagio(matriz);</b>
+<i>204</i>&nbsp;
+<i>205</i>&nbsp;                    //Aqui leo la ultima linea donde indica si hay posibilidad de reinfeccion.
+<b class="nc"><i>206</i>&nbsp;                    String lastLine = myReader.nextLine();</b>
+<b class="nc"><i>207</i>&nbsp;                    enfermedad.setReinfeccion(Integer.parseInt(lastLine));</b>
+<i>208</i>&nbsp;
+<i>209</i>&nbsp;                    //Esta linea lee la cantidad de dias que el programa va a simular.
+<b class="nc"><i>210</i>&nbsp;                    String lastLine2 = myReader.nextLine();</b>
+<b class="nc"><i>211</i>&nbsp;                    enfermedad.setDias_totales(Integer.parseInt(lastLine2));</b>
+<i>212</i>&nbsp;
+<b class="nc"><i>213</i>&nbsp;                    enfermedad.setDias_corriendo(0);</b>
+<b class="nc"><i>214</i>&nbsp;                    enfermedad.setCantidad_enfermos_actuales(0);</b>
+<b class="nc"><i>215</i>&nbsp;                    enfermedad.setCantidad_recuperados_actuales(0);</b>
+<b class="nc"><i>216</i>&nbsp;                    enfermedad.setCantidad_sanos_actuales(0);</b>
+<i>217</i>&nbsp;
+<b class="nc"><i>218</i>&nbsp;                    configuracion_de_enfermedad = enfermedad;</b>
+<b class="nc"><i>219</i>&nbsp;                    archivosCargados += 1;</b>
+<i>220</i>&nbsp;
+<b class="nc"><i>221</i>&nbsp;                } catch (Exception err) {</b>
+<b class="nc"><i>222</i>&nbsp;                    JOptionPane.showMessageDialog(null, err);</b>
+<b class="nc"><i>223</i>&nbsp;                }</b>
+<i>224</i>&nbsp;            }
+<b class="nc"><i>225</i>&nbsp;        }</b>
+<i>226</i>&nbsp;    }
+<i>227</i>&nbsp;
+<b class="nc"><i>228</i>&nbsp;    class comenzar_prueba implements ActionListener {</b>
+<i>229</i>&nbsp;        @Override
+<i>230</i>&nbsp;        public void actionPerformed(ActionEvent e) {
+<b class="nc"><i>231</i>&nbsp;            System.out.println(arreglo_de_agentes.toString());</b>
+<b class="nc"><i>232</i>&nbsp;            System.out.println(configuracion_de_mapa.toString());</b>
+<b class="nc"><i>233</i>&nbsp;            System.out.println(configuracion_de_enfermedad.toString());</b>
+<b class="nc"><i>234</i>&nbsp;                new MainGuiFrameMulti(arreglo_de_agentes, configuracion_de_mapa, configuracion_de_enfermedad, arreglo_de_agentes.size());</b>
+<b class="nc"><i>235</i>&nbsp;        }</b>
+<i>236</i>&nbsp;    }
+<i>237</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-22 23:47</div>
+</div>
+</body>
+</html>
