@@ -13,10 +13,10 @@ import java.net.Socket;
 
 public class ClientGui {
 
-    JFrame f;
+    public JFrame f;
 
-    JTextField name_of_the_country = new JTextField();
-    JButton start_button = new JButton("Ready to start");//creating instance of JButton
+    public JTextField name_of_the_country = new JTextField();
+    public JButton start_button = new JButton("Ready to start");//creating instance of JButton
     JLabel label = new JLabel("Connecting to server...");
 
     public ClientGui() {

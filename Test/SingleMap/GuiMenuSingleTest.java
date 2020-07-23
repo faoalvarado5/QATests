@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import javax.swing.*;
 
 import java.awt.*;
+import java.io.File;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,13 +22,6 @@ class GuiMenuSingleTest {
     }
 
     @Test
-    void test1() throws InterruptedException {
-        GuiMenuSingle test = new GuiMenuSingle();
-        Thread.sleep(2000);
-        assertEquals(test.f.getTitle(), "Simulacion de propagacion de COVID-19");
-    }
-
-    @Test
     void cargarMapa(){
 
         // Caso de prueba #4
@@ -37,6 +31,49 @@ class GuiMenuSingleTest {
         for (Window window1 : JDialog.getWindows()) {
             if ( window1 instanceof JDialog) {
                 assertEquals(((JDialog)window1).getTitle(), "Open");
+            }
+        }
+    }
+
+    @Test
+    void cargarAgentes(){
+
+        // Caso de prueba #11
+        GuiMenuSingle gms = new GuiMenuSingle();
+        gms.boton_agentes.doClick();
+
+        for (Window window1 : JDialog.getWindows()) {
+            if ( window1 instanceof JDialog) {
+                assertEquals(((JDialog)window1).getTitle(), "Open");
+            }
+        }
+    }
+
+    @Test
+    void cargarEnfermedad(){
+
+        // Caso de prueba #12
+        GuiMenuSingle gms = new GuiMenuSingle();
+        gms.boton_enferdad.doClick();
+
+        for (Window window1 : JDialog.getWindows()) {
+            if ( window1 instanceof JDialog) {
+                assertEquals(((JDialog)window1).getTitle(), "Open");
+            }
+        }
+    }
+
+    @Test
+    void loadValidMapFile(){
+
+        // Caso de prueba #7
+        GuiMenuSingle gms = new GuiMenuSingle();
+        gms.boton_mapa.doClick();
+
+        for (Window window1 : JDialog.getWindows()) {
+            if ( window1 instanceof JDialog) {
+
+                //System.out.println((JFileChooser)window1.l);
             }
         }
     }

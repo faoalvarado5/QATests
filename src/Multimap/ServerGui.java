@@ -13,9 +13,9 @@ import java.util.concurrent.TimeUnit;
 
 public class ServerGui {
 
-    JFrame f;
+    public JFrame f;
 
-    JButton start_button = new JButton("Ready to start");//creating instance of JButton
+    public JButton start_button = new JButton("Ready to start");//creating instance of JButton
     JLabel label = new JLabel("Looking for clients...");
     JLabel label_of_countries_connected = new JLabel("");
     int number_of_clients_connected = 1;
