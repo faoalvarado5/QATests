@@ -12,7 +12,7 @@ import Classes.*;
 
 public class GuiMenuSingle {
 
-    JFrame f;
+    public JFrame f;
     ArrayList<agente> arreglo_de_agentes;
     mapa configuracion_de_mapa;
     enfermedad configuracion_de_enfermedad;
@@ -23,7 +23,7 @@ public class GuiMenuSingle {
 
     public GuiMenuSingle() {
 
-        f = new JFrame("Simulacion de propagacion de COVID-19");//creating instance of JFrame
+        f = new JFrame("Configuracion de datos.");//creating instance of JFrame
         JLabel label1 = new JLabel("Ingrese los archivos de configuracion.");
 
         boton_agentes.setEnabled(false);
